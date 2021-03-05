@@ -11,17 +11,17 @@ import ARKit
 class VirtualObjectARView: ARSCNView {
 
     // MARK: Position Testing
-    
+
     /// Hit tests against the `sceneView` to find an object at the provided point.
     func virtualObject(at point: CGPoint) -> VirtualObject? {
         let hitTestOptions: [SCNHitTestOption: Any] = [.boundingBoxOnly: true]
         let hitTestResults = hitTest(point, options: hitTestOptions)
-        
+
         return hitTestResults.lazy.compactMap { result in
             return VirtualObject.existingObjectContainingNode(result.node)
         }.first
     }
-    
+
     // - MARK: Object anchors
     /// - Tag: AddOrUpdateAnchor
     func addOrUpdateAnchor(for object: VirtualObject) {
@@ -29,7 +29,7 @@ class VirtualObjectARView: ARSCNView {
         if let anchor = object.anchor {
             session.remove(anchor: anchor)
         }
-        
+        /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
         // Create a new anchor with the object's current transform and add it to the session
         let newAnchor = ARAnchor(transform: object.simdWorldTransform)
         object.anchor = newAnchor
@@ -45,7 +45,7 @@ extension ARSCNView {
     func unprojectPoint(_ point: SIMD3<Float>) -> SIMD3<Float> {
         return SIMD3<Float>(unprojectPoint(SCNVector3(point)))
     }
-    
+
     // - Tag: CastRayForFocusSquarePosition
     func castRay(for query: ARRaycastQuery) -> [ARRaycastResult] {
         return session.raycast(query)
@@ -55,7 +55,7 @@ extension ARSCNView {
     func getRaycastQuery(for alignment: ARRaycastQuery.TargetAlignment = .any) -> ARRaycastQuery? {
         return raycastQuery(from: screenCenter, allowing: .estimatedPlane, alignment: alignment)
     }
-    
+
     var screenCenter: CGPoint {
         return CGPoint(x: bounds.midX, y: bounds.midY)
     }

@@ -61,10 +61,13 @@ class FocusSquare: SCNNode {
                 displayAsBillboard()
                 
             case let .detecting(raycastResult, camera):
+                /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
                 if let planeAnchor = raycastResult.anchor as? ARPlaneAnchor {
                     displayAsClosed(for: raycastResult, planeAnchor: planeAnchor, camera: camera)
+                    print("Found a plane anchor")
                 } else {
                     displayAsOpen(for: raycastResult, camera: camera)
+                    print("Not a plane anchor")
                 }
             }
         }
@@ -182,7 +185,7 @@ class FocusSquare: SCNNode {
         performOpenAnimation()
     }
 
-    /// Called when a surface has been detected.
+    /// Called when a plane has not been detected.
     private func displayAsOpen(for raycastResult: ARRaycastResult, camera: ARCamera?) {
         performOpenAnimation()
         setPosition(with: raycastResult, camera)

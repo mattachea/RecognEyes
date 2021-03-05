@@ -12,10 +12,10 @@ extension ViewController: ARSCNViewDelegate, ARSessionDelegate {
     // MARK: - ARSCNViewDelegate
     
     func renderer(_ renderer: SCNSceneRenderer, updateAtTime time: TimeInterval) {
-        
         let isAnyObjectInView = virtualObjectLoader.loadedObjects.contains { object in
             return sceneView.isNode(object, insideFrustumOf: sceneView.pointOfView!)
         }
+
         
         DispatchQueue.main.async {
             self.updateFocusSquare(isObjectVisible: isAnyObjectInView)
@@ -32,9 +32,10 @@ extension ViewController: ARSCNViewDelegate, ARSessionDelegate {
         DispatchQueue.main.async {
             self.statusViewController.cancelScheduledMessage(for: .planeEstimation)
             self.statusViewController.showMessage("SURFACE DETECTED")
-            if self.virtualObjectLoader.loadedObjects.isEmpty {
-                self.statusViewController.scheduleMessage("TAP + TO PLACE AN OBJECT", inSeconds: 7.5, messageType: .contentPlacement)
-            }
+//            if self.virtualObjectLoader.loadedObjects.isEmpty {
+//                self.statusViewController.scheduleMessage("TAP + TO PLACE AN OBJECT", inSeconds: 7.5, messageType: .contentPlacement)
+//            }
+
         }
     }
     
@@ -44,6 +45,7 @@ extension ViewController: ARSCNViewDelegate, ARSessionDelegate {
                 objectAtAnchor.simdPosition = anchor.transform.translation
                 objectAtAnchor.anchor = anchor
             }
+
         }
     }
     
@@ -61,8 +63,17 @@ extension ViewController: ARSCNViewDelegate, ARSessionDelegate {
 
     func showVirtualContent() {
         virtualObjectLoader.loadedObjects.forEach { $0.isHidden = false }
+
+    }
+    
+    
+    // MARK: Perform Detection
+    func session(_ session: ARSession, didUpdate frame: ARFrame) {
+        detect(frame: frame)
     }
 
+    
+    
     func session(_ session: ARSession, didFailWithError error: Error) {
         guard error is ARError else { return }
         
@@ -88,6 +99,7 @@ extension ViewController: ARSCNViewDelegate, ARSessionDelegate {
     /// - Tag: HideVirtualContent
     func hideVirtualContent() {
         virtualObjectLoader.loadedObjects.forEach { $0.isHidden = true }
+
     }
 
     /*

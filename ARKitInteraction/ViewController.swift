@@ -8,6 +8,7 @@ Main view controller for the AR experience.
 import ARKit
 import SceneKit
 import UIKit
+import Vision
 
 class ViewController: UIViewController {
     
@@ -25,7 +26,33 @@ class ViewController: UIViewController {
 
     // MARK: - UI Elements
     
-    let coachingOverlay = ARCoachingOverlayView()
+//    let coachingOverlay = ARCoachingOverlayView()
+    /// Size of the camera image buffer (used for overlaying boxes)
+    var bufferSize: CGSize! {
+        didSet {
+            if bufferSize != nil {
+                if oldValue == nil {
+                    setupLayers()
+                } else if oldValue != bufferSize {
+                    updateDetectionOverlaySize()
+                }
+            }
+
+        }
+    }
+    /// The last known image orientation
+    /// When the image orientation changes, the buffer size used for rendering boxes needs to be adjusted
+    var lastOrientation: CGImagePropertyOrientation = .right
+    /// Vision request for the detection model
+    var objectDetectionRequest: VNCoreMLRequest!
+    /// Concurrent queue to be used for model predictions
+    let predictionQueue = DispatchQueue(label: "predictionQueue",
+                                        qos: .userInitiated,
+                                        attributes: [],
+                                        autoreleaseFrequency: .inherit,
+                                        target: nil)
+
+    
     
     var focusSquare = FocusSquare()
     
@@ -40,10 +67,13 @@ class ViewController: UIViewController {
     // MARK: - ARKit Configuration Properties
     
     /// A type which manages gesture manipulation of virtual content in the scene.
-    lazy var virtualObjectInteraction = VirtualObjectInteraction(sceneView: sceneView, viewController: self)
+//    lazy var virtualObjectInteraction = VirtualObjectInteraction(sceneView: sceneView, viewController: self)
     
     /// Coordinates the loading and unloading of reference nodes for virtual objects.
     let virtualObjectLoader = VirtualObjectLoader()
+    
+    
+    
     
     /// Marks if the AR experience is available for restart.
     var isRestartAvailable = true
@@ -56,6 +86,17 @@ class ViewController: UIViewController {
         return sceneView.session
     }
     
+    
+    /// Layer used to host detectionOverlay layer
+    var rootLayer: CALayer!
+    /// The detection overlay layer used to render bounding boxes
+    var detectionOverlay: CALayer!
+    
+    
+    
+    
+    
+    
     // MARK: - View Controller Life Cycle
     
     override func viewDidLoad() {
@@ -65,12 +106,18 @@ class ViewController: UIViewController {
         sceneView.session.delegate = self
         
         // Set up coaching overlay.
-        setupCoachingOverlay()
+//        setupCoachingOverlay()
+        
+        // Get the root layer so in order to draw rectangles
+        rootLayer = sceneView.layer
 
         // Set up scene content.
         sceneView.scene.rootNode.addChildNode(focusSquare)
-
-        // Hook up status view controller callback(s).
+        
+        // Set up Object Detection
+        setupObjectDetection()
+        
+        //Hook up status view controller callback(s).
         statusViewController.restartExperienceHandler = { [unowned self] in
             self.restartExperience()
         }
@@ -105,7 +152,7 @@ class ViewController: UIViewController {
     
     /// Creates a new AR configuration to run on the `session`.
     func resetTracking() {
-        virtualObjectInteraction.selectedObject = nil
+//        virtualObjectInteraction.selectedObject = nil
         
         let configuration = ARWorldTrackingConfiguration()
         configuration.planeDetection = [.horizontal, .vertical]
@@ -114,21 +161,26 @@ class ViewController: UIViewController {
         }
         session.run(configuration, options: [.resetTracking, .removeExistingAnchors])
 
-        statusViewController.scheduleMessage("FIND A SURFACE TO PLACE AN OBJECT", inSeconds: 7.5, messageType: .planeEstimation)
+        statusViewController.scheduleMessage("MOVE PHONE TO FIND OBJECTS", inSeconds: 7.5, messageType: .planeEstimation)
     }
 
     // MARK: - Focus Square
 
     func updateFocusSquare(isObjectVisible: Bool) {
-        if isObjectVisible || coachingOverlay.isActive {
+//        if isObjectVisible || coachingOverlay.isActive {
+        if isObjectVisible {
             focusSquare.hide()
         } else {
             focusSquare.unhide()
             statusViewController.scheduleMessage("TRY MOVING LEFT OR RIGHT", inSeconds: 5.0, messageType: .focusSquare)
         }
         
+        
+        
+        /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
         // Perform ray casting only when ARKit tracking is in a good state.
         if let camera = session.currentFrame?.camera, case .normal = camera.trackingState,
+           
             let query = sceneView.getRaycastQuery(),
             let result = sceneView.castRay(for: query).first {
             
@@ -136,19 +188,37 @@ class ViewController: UIViewController {
                 self.sceneView.scene.rootNode.addChildNode(self.focusSquare)
                 self.focusSquare.state = .detecting(raycastResult: result, camera: camera)
             }
-            if !coachingOverlay.isActive {
-                addObjectButton.isHidden = false
-            }
+//            if !coachingOverlay.isActive {
+//                addObjectButton.isHidden = false
+//            }
             statusViewController.cancelScheduledMessage(for: .focusSquare)
         } else {
             updateQueue.async {
                 self.focusSquare.state = .initializing
                 self.sceneView.pointOfView?.addChildNode(self.focusSquare)
             }
-            addObjectButton.isHidden = true
+//            addObjectButton.isHidden = true
             objectsViewController?.dismiss(animated: false, completion: nil)
         }
     }
+    
+    // MARK: - BOUNDING BOXES
+    func bounds(for observation: VNRecognizedObjectObservation) -> CGRect {
+        let boundingBox = observation.boundingBox
+        // Coordinate system is like macOS, origin is on bottom-left and not top-left
+        // The resulting bounding box from the prediction is a normalized bounding box with coordinates from bottom left
+        // It needs to be flipped along the y axis
+        let fixedBoundingBox = CGRect(x: boundingBox.origin.x,
+                                      y: 1.0 - boundingBox.origin.y - boundingBox.height,
+                                      width: boundingBox.width,
+                                      height: boundingBox.height)
+
+        // Return a flipped and scaled rectangle corresponding to the coordinates in the sceneView
+        return VNImageRectForNormalizedRect(fixedBoundingBox, Int(self.sceneView.bounds.width), Int(self.sceneView.bounds.height))
+    }
+    
+   
+            
     
     // MARK: - Error handling
     

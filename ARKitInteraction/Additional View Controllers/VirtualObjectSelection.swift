@@ -12,11 +12,11 @@ import ARKit
 
 class ObjectCell: UITableViewCell {
     static let reuseIdentifier = "ObjectCell"
-    
+
     @IBOutlet weak var objectTitleLabel: UILabel!
     @IBOutlet weak var objectImageView: UIImageView!
     @IBOutlet weak var vibrancyView: UIVisualEffectView!
-    
+
     var modelName = "" {
         didSet {
             objectTitleLabel.text = modelName.capitalized
@@ -35,35 +35,35 @@ protocol VirtualObjectSelectionViewControllerDelegate: class {
 
 /// A custom table view controller to allow users to select `VirtualObject`s for placement in the scene.
 class VirtualObjectSelectionViewController: UITableViewController {
-    
+
     /// The collection of `VirtualObject`s to select from.
     var virtualObjects = [VirtualObject]()
-    
+
     /// The rows of the currently selected `VirtualObject`s.
     var selectedVirtualObjectRows = IndexSet()
-    
+
     /// The rows of the 'VirtualObject's that are currently allowed to be placed.
     var enabledVirtualObjectRows = Set<Int>()
-    
+
     weak var delegate: VirtualObjectSelectionViewControllerDelegate?
-    
+
     weak var sceneView: ARSCNView?
 
     private var lastObjectAvailabilityUpdateTimestamp: TimeInterval?
-    
+
     override func viewDidLoad() {
         super.viewDidLoad()
 
         tableView.separatorEffect = UIVibrancyEffect(blurEffect: UIBlurEffect(style: .light))
     }
-    
+
     override func viewWillLayoutSubviews() {
         preferredContentSize = CGSize(width: 250, height: tableView.contentSize.height)
     }
-    
+
     func updateObjectAvailability() {
         guard let sceneView = sceneView else { return }
-        
+
         // Update object availability only if the last update was at least half a second ago.
         if let lastUpdateTimestamp = lastObjectAvailabilityUpdateTimestamp,
             let timestamp = sceneView.session.currentFrame?.timestamp,
@@ -72,14 +72,14 @@ class VirtualObjectSelectionViewController: UITableViewController {
         } else {
             lastObjectAvailabilityUpdateTimestamp = sceneView.session.currentFrame?.timestamp
         }
-                
+
         var newEnabledVirtualObjectRows = Set<Int>()
         for (row, object) in VirtualObject.availableObjects.enumerated() {
             // Enable row always if item is already placed, in order to allow the user to remove it.
             if selectedVirtualObjectRows.contains(row) {
                 newEnabledVirtualObjectRows.insert(row)
             }
-            
+
             // Enable row if item can be placed at the current location
             if let query = sceneView.getRaycastQuery(for: object.allowedAlignment),
                 let result = sceneView.castRay(for: query).first {
@@ -91,7 +91,7 @@ class VirtualObjectSelectionViewController: UITableViewController {
                 object.raycastQuery = nil
             }
         }
-        
+
         // Only reload changed rows
         let changedRows = newEnabledVirtualObjectRows.symmetricDifference(enabledVirtualObjectRows)
         enabledVirtualObjectRows = newEnabledVirtualObjectRows
@@ -101,15 +101,15 @@ class VirtualObjectSelectionViewController: UITableViewController {
             self.tableView.reloadRows(at: indexPaths, with: .automatic)
         }
     }
-    
+
     // MARK: - UITableViewDelegate
-    
+
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         let cellIsEnabled = enabledVirtualObjectRows.contains(indexPath.row)
         guard cellIsEnabled else { return }
-        
+
         let object = virtualObjects[indexPath.row]
-        
+
         // Check if the current row is already selected, then deselect it.
         if selectedVirtualObjectRows.contains(indexPath.row) {
             delegate?.virtualObjectSelectionViewController(self, didDeselectObject: object)
@@ -119,18 +119,18 @@ class VirtualObjectSelectionViewController: UITableViewController {
 
         dismiss(animated: true, completion: nil)
     }
-        
+
     // MARK: - UITableViewDataSource
-    
+
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return virtualObjects.count
     }
-    
+
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         guard let cell = tableView.dequeueReusableCell(withIdentifier: ObjectCell.reuseIdentifier, for: indexPath) as? ObjectCell else {
             fatalError("Expected `\(ObjectCell.self)` type for reuseIdentifier \(ObjectCell.reuseIdentifier). Check the configuration in Main.storyboard.")
         }
-        
+
         cell.modelName = virtualObjects[indexPath.row].modelName
 
         if selectedVirtualObjectRows.contains(indexPath.row) {
@@ -138,7 +138,7 @@ class VirtualObjectSelectionViewController: UITableViewController {
         } else {
             cell.accessoryType = .none
         }
-        
+
         let cellIsEnabled = enabledVirtualObjectRows.contains(indexPath.row)
         if cellIsEnabled {
             cell.vibrancyView.alpha = 1.0
@@ -148,7 +148,7 @@ class VirtualObjectSelectionViewController: UITableViewController {
 
         return cell
     }
-    
+
     override func tableView(_ tableView: UITableView, didHighlightRowAt indexPath: IndexPath) {
         let cellIsEnabled = enabledVirtualObjectRows.contains(indexPath.row)
         guard cellIsEnabled else { return }
@@ -156,7 +156,7 @@ class VirtualObjectSelectionViewController: UITableViewController {
         let cell = tableView.cellForRow(at: indexPath)
         cell?.backgroundColor = UIColor.lightGray.withAlphaComponent(0.5)
     }
-    
+
     override func tableView(_ tableView: UITableView, didUnhighlightRowAt indexPath: IndexPath) {
         let cellIsEnabled = enabledVirtualObjectRows.contains(indexPath.row)
         guard cellIsEnabled else { return }
