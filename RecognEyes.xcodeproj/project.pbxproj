@@ -40,7 +40,7 @@
 		1488323E1EFC378A0043E0AB /* ViewController+Actions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "ViewController+Actions.swift"; sourceTree = "<group>"; };
 		148832401EFC3B250043E0AB /* FocusSquareSegment.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FocusSquareSegment.swift; sourceTree = "<group>"; };
 		19055EBC177090706502AFD5 /* LICENSE.txt */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text; path = LICENSE.txt; sourceTree = "<group>"; };
-		3929C4881E89EC2C00E00B60 /* ARKitInteraction.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = ARKitInteraction.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		3929C4881E89EC2C00E00B60 /* RecognEyes.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = RecognEyes.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		3929C48B1E89EC2C00E00B60 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		3929C48D1E89EC2C00E00B60 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
 		3929C4901E89EC2C00E00B60 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
@@ -119,7 +119,7 @@
 			isa = PBXGroup;
 			children = (
 				11063F3B1EBE651B0033EE6D /* README.md */,
-				3929C48A1E89EC2C00E00B60 /* ARKitInteraction */,
+				3929C48A1E89EC2C00E00B60 /* RecognEyes */,
 				3929C4891E89EC2C00E00B60 /* Products */,
 				68823732822689128CA49D7D /* Configuration */,
 				616626D1A5AEF839B8BB5535 /* LICENSE */,
@@ -129,12 +129,12 @@
 		3929C4891E89EC2C00E00B60 /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				3929C4881E89EC2C00E00B60 /* ARKitInteraction.app */,
+				3929C4881E89EC2C00E00B60 /* RecognEyes.app */,
 			);
 			name = Products;
 			sourceTree = "<group>";
 		};
-		3929C48A1E89EC2C00E00B60 /* ARKitInteraction */ = {
+		3929C48A1E89EC2C00E00B60 /* RecognEyes */ = {
 			isa = PBXGroup;
 			children = (
 				3929C48B1E89EC2C00E00B60 /* AppDelegate.swift */,
@@ -155,7 +155,7 @@
 				1488324A1EFC3E9C0043E0AB /* Utilities */,
 				1488324C1EFC3ED00043E0AB /* Resources */,
 			);
-			path = ARKitInteraction;
+			path = RecognEyes;
 			sourceTree = "<group>";
 		};
 		616626D1A5AEF839B8BB5535 /* LICENSE */ = {
@@ -186,9 +186,9 @@
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
-		3929C4871E89EC2C00E00B60 /* ARKitInteraction */ = {
+		3929C4871E89EC2C00E00B60 /* RecognEyes */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = 3929C49A1E89EC2C00E00B60 /* Build configuration list for PBXNativeTarget "ARKitInteraction" */;
+			buildConfigurationList = 3929C49A1E89EC2C00E00B60 /* Build configuration list for PBXNativeTarget "RecognEyes" */;
 			buildPhases = (
 				3929C4841E89EC2C00E00B60 /* Sources */,
 				3929C4851E89EC2C00E00B60 /* Frameworks */,
@@ -198,9 +198,9 @@
 			);
 			dependencies = (
 			);
-			name = ARKitInteraction;
+			name = RecognEyes;
 			productName = ARKitInteraction;
-			productReference = 3929C4881E89EC2C00E00B60 /* ARKitInteraction.app */;
+			productReference = 3929C4881E89EC2C00E00B60 /* RecognEyes.app */;
 			productType = "com.apple.product-type.application";
 		};
 /* End PBXNativeTarget section */
@@ -210,7 +210,7 @@
 			isa = PBXProject;
 			attributes = {
 				LastSwiftUpdateCheck = 0900;
-				LastUpgradeCheck = 1100;
+				LastUpgradeCheck = 1240;
 				ORGANIZATIONNAME = Apple;
 				TargetAttributes = {
 					3929C4871E89EC2C00E00B60 = {
@@ -221,7 +221,7 @@
 					};
 				};
 			};
-			buildConfigurationList = 3929C4831E89EC2C00E00B60 /* Build configuration list for PBXProject "ARKitInteraction" */;
+			buildConfigurationList = 3929C4831E89EC2C00E00B60 /* Build configuration list for PBXProject "RecognEyes" */;
 			compatibilityVersion = "Xcode 3.2";
 			developmentRegion = en;
 			hasScannedForEncodings = 0;
@@ -234,7 +234,7 @@
 			projectDirPath = "";
 			projectRoot = "";
 			targets = (
-				3929C4871E89EC2C00E00B60 /* ARKitInteraction */,
+				3929C4871E89EC2C00E00B60 /* RecognEyes */,
 			);
 		};
 /* End PBXProject section */
@@ -323,6 +323,7 @@
 				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
 				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
 				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
 				CLANG_WARN_STRICT_PROTOTYPES = YES;
 				CLANG_WARN_SUSPICIOUS_MOVE = YES;
@@ -347,9 +348,11 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 11.3;
+				INFOPLIST_FILE = RecognEyes/Resources/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 12.0;
 				MTL_ENABLE_DEBUG_INFO = YES;
 				ONLY_ACTIVE_ARCH = YES;
+				PRODUCT_NAME = RecognEyes;
 				SDKROOT = iphoneos;
 				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
@@ -384,6 +387,7 @@
 				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
 				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
 				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
 				CLANG_WARN_STRICT_PROTOTYPES = YES;
 				CLANG_WARN_SUSPICIOUS_MOVE = YES;
@@ -402,8 +406,10 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 11.3;
+				INFOPLIST_FILE = RecognEyes/Resources/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 12.0;
 				MTL_ENABLE_DEBUG_INFO = NO;
+				PRODUCT_NAME = RecognEyes;
 				SDKROOT = iphoneos;
 				SWIFT_OPTIMIZATION_LEVEL = "-Owholemodule";
 				TARGETED_DEVICE_FAMILY = "1,2";
@@ -421,10 +427,10 @@
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = 7657PJ7GJ8;
-				INFOPLIST_FILE = "$(SRCROOT)/ARKitInteraction/Resources/Info.plist";
+				INFOPLIST_FILE = "$(SRCROOT)/RecognEyes/Resources/Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = "com.example.apple-samplecode.arkit-sample-app${SAMPLE_CODE_DISAMBIGUATOR}";
+				PRODUCT_BUNDLE_IDENTIFIER = RecognEyes;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
 				SWIFT_SWIFT3_OBJC_INFERENCE = Default;
@@ -442,10 +448,10 @@
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = 7657PJ7GJ8;
-				INFOPLIST_FILE = "$(SRCROOT)/ARKitInteraction/Resources/Info.plist";
+				INFOPLIST_FILE = "$(SRCROOT)/RecognEyes/Resources/Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = "com.example.apple-samplecode.arkit-sample-app${SAMPLE_CODE_DISAMBIGUATOR}";
+				PRODUCT_BUNDLE_IDENTIFIER = RecognEyes;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
 				SWIFT_SWIFT3_OBJC_INFERENCE = Default;
@@ -456,7 +462,7 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
-		3929C4831E89EC2C00E00B60 /* Build configuration list for PBXProject "ARKitInteraction" */ = {
+		3929C4831E89EC2C00E00B60 /* Build configuration list for PBXProject "RecognEyes" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				3929C4981E89EC2C00E00B60 /* Debug */,
@@ -465,7 +471,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		3929C49A1E89EC2C00E00B60 /* Build configuration list for PBXNativeTarget "ARKitInteraction" */ = {
+		3929C49A1E89EC2C00E00B60 /* Build configuration list for PBXNativeTarget "RecognEyes" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				3929C49B1E89EC2C00E00B60 /* Debug */,

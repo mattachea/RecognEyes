@@ -99,40 +99,40 @@ extension ViewController {
         drawBoxes(observations: [])
     }
 
-//    //NOT NEEDED RIGHT NOW. ONLY NEED TO DRAW ONE BOX
-//    /// Draws bounding boxes based on the object observations
-//    ///
-//    /// - parameter observations: The list of object observations from the object detector
-//    func drawBoxes(observations: [VNRecognizedObjectObservation]) {
-//        DispatchQueue.main.async {
-//            //use CATransaction to group multiple renders together (not needed right now since only one return per function call)
-//            CATransaction.begin()
-//            CATransaction.setValue(kCFBooleanTrue, forKey: kCATransactionDisableActions)
-//            self.detectionOverlay.sublayers = nil // remove all the old recognized objects
-//
-//            //for many observations
-//            for observation in observations {
-//
-//                // Select only the label with the highest confidence.
-//                guard let topLabelObservation = observation.labels.first else {
-//                    print("Object observation has no labels")
-//                    continue
-//                }
-//                let objectBounds = self.bounds(for: observation)
-//                let shapeLayer = self.createRoundedRectLayerWithBounds(objectBounds)
-//                let textLayer = self.createTextSubLayerInBounds(objectBounds,
-//                                                                identifier: topLabelObservation.identifier,
-//                                                                confidence: topLabelObservation.confidence)
-//                shapeLayer.addSublayer(textLayer)
-//                self.detectionOverlay.addSublayer(shapeLayer)
-//                print(topLabelObservation.identifier)
-//            }
-//
-//            self.updateLayerGeometry()
-//            CATransaction.commit()
-//        }
-//
-//    }
+    //NOT NEEDED RIGHT NOW. ONLY NEED TO DRAW ONE BOX
+    /// Draws bounding boxes based on the object observations
+    ///
+    /// - parameter observations: The list of object observations from the object detector
+    func drawBoxes(observations: [VNRecognizedObjectObservation]) {
+        DispatchQueue.main.async {
+            //use CATransaction to group multiple renders together (not needed right now since only one return per function call)
+            CATransaction.begin()
+            CATransaction.setValue(kCFBooleanTrue, forKey: kCATransactionDisableActions)
+            self.detectionOverlay.sublayers = nil // remove all the old recognized objects
+
+            //for many observations
+            for observation in observations {
+
+                // Select only the label with the highest confidence.
+                guard let topLabelObservation = observation.labels.first else {
+                    print("Object observation has no labels")
+                    continue
+                }
+                let objectBounds = self.bounds(for: observation)
+                let shapeLayer = self.createRoundedRectLayerWithBounds(objectBounds)
+                let textLayer = self.createTextSubLayerInBounds(objectBounds,
+                                                                identifier: topLabelObservation.identifier,
+                                                                confidence: topLabelObservation.confidence)
+                shapeLayer.addSublayer(textLayer)
+                self.detectionOverlay.addSublayer(shapeLayer)
+                print(topLabelObservation.identifier)
+            }
+
+            self.updateLayerGeometry()
+            CATransaction.commit()
+        }
+
+    }
     
     
     //for one observation
