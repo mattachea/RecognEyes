@@ -18,28 +18,23 @@
 		3929C49F1E89EE4400E00B60 /* Models.scnassets in Resources */ = {isa = PBXBuildFile; fileRef = 3929C49E1E89EE4400E00B60 /* Models.scnassets */; };
 		39C0B95A1E9C6B1F003FCA0C /* Utilities.swift in Sources */ = {isa = PBXBuildFile; fileRef = 39C0B9581E9C6B1F003FCA0C /* Utilities.swift */; };
 		39D8DC1B1E8ADAE600386B05 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 39D8DC1A1E8ADAE600386B05 /* LaunchScreen.storyboard */; };
+		A3AC063125F5CE070073CC4B /* doorYolo.mlmodel in Sources */ = {isa = PBXBuildFile; fileRef = A3AC063025F5CE070073CC4B /* doorYolo.mlmodel */; };
+		A3AC063425F5D2AC0073CC4B /* Box.swift in Sources */ = {isa = PBXBuildFile; fileRef = A3AC063325F5D2AC0073CC4B /* Box.swift */; };
+		A3AC063E25F727050073CC4B /* BoxController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A3AC063D25F727050073CC4B /* BoxController.swift */; };
 		A3FCFE9525EB387200707F00 /* ViewController+BoundingBoxes.swift in Sources */ = {isa = PBXBuildFile; fileRef = A3FCFE9425EB387200707F00 /* ViewController+BoundingBoxes.swift */; };
-		A3FCFE9825EB3A3500707F00 /* doorYolo.mlmodel in Sources */ = {isa = PBXBuildFile; fileRef = A3FCFE9725EB3A3500707F00 /* doorYolo.mlmodel */; };
 		A3FCFE9B25EB3AC200707F00 /* ViewController+ObjectDetection.swift in Sources */ = {isa = PBXBuildFile; fileRef = A3FCFE9A25EB3AC200707F00 /* ViewController+ObjectDetection.swift */; };
 		A3FCFEA125EB43D800707F00 /* ThresholdProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = A3FCFEA025EB43D800707F00 /* ThresholdProvider.swift */; };
-		A3FCFEF425EF488A00707F00 /* BubbleNode.swift in Sources */ = {isa = PBXBuildFile; fileRef = A3FCFEF325EF488900707F00 /* BubbleNode.swift */; };
 		C41366B91EB80DD400EC054A /* StatusViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C41366B81EB80DD400EC054A /* StatusViewController.swift */; };
 		C42A71BD1E9C0AF200944367 /* FocusSquare.swift in Sources */ = {isa = PBXBuildFile; fileRef = C42A71BC1E9C0AF200944367 /* FocusSquare.swift */; };
 		C46356671EF9CC500080C8D9 /* VirtualObjectARView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C46356661EF9CC480080C8D9 /* VirtualObjectARView.swift */; };
-		C46356681EF9CC530080C8D9 /* VirtualObjectLoader.swift in Sources */ = {isa = PBXBuildFile; fileRef = C46356651EF9CB1A0080C8D9 /* VirtualObjectLoader.swift */; };
 		C8C12A711F29277B00B011FE /* ViewController+ARSCNViewDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = C8C12A701F29277B00B011FE /* ViewController+ARSCNViewDelegate.swift */; };
-		C8C2AC521F3A545C00E86BA3 /* VirtualObjectInteraction.swift in Sources */ = {isa = PBXBuildFile; fileRef = C8C2AC511F3A545C00E86BA3 /* VirtualObjectInteraction.swift */; };
-		C8D71A001F3B7D3D0086AD64 /* VirtualObject.swift in Sources */ = {isa = PBXBuildFile; fileRef = C8D719FF1F3B7D3D0086AD64 /* VirtualObject.swift */; };
-		E187105E2253C46A003B54DA /* ViewController+CoachingOverlay.swift in Sources */ = {isa = PBXBuildFile; fileRef = E187105D2253C46A003B54DA /* ViewController+CoachingOverlay.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
-		11063F3B1EBE651B0033EE6D /* README.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
 		147062631F06FA790003EE03 /* VirtualObjectSelection.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VirtualObjectSelection.swift; sourceTree = "<group>"; };
 		147D76491EFC36070000FEBF /* ViewController+ObjectSelection.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "ViewController+ObjectSelection.swift"; sourceTree = "<group>"; };
 		1488323E1EFC378A0043E0AB /* ViewController+Actions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "ViewController+Actions.swift"; sourceTree = "<group>"; };
 		148832401EFC3B250043E0AB /* FocusSquareSegment.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FocusSquareSegment.swift; sourceTree = "<group>"; };
-		19055EBC177090706502AFD5 /* LICENSE.txt */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text; path = LICENSE.txt; sourceTree = "<group>"; };
 		3929C4881E89EC2C00E00B60 /* RecognEyes.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = RecognEyes.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		3929C48B1E89EC2C00E00B60 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		3929C48D1E89EC2C00E00B60 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
@@ -49,20 +44,16 @@
 		3929C49E1E89EE4400E00B60 /* Models.scnassets */ = {isa = PBXFileReference; lastKnownFileType = wrapper.scnassets; path = Models.scnassets; sourceTree = "<group>"; };
 		39C0B9581E9C6B1F003FCA0C /* Utilities.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Utilities.swift; sourceTree = "<group>"; };
 		39D8DC1A1E8ADAE600386B05 /* LaunchScreen.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = LaunchScreen.storyboard; sourceTree = "<group>"; };
+		A3AC063025F5CE070073CC4B /* doorYolo.mlmodel */ = {isa = PBXFileReference; lastKnownFileType = file.mlmodel; name = doorYolo.mlmodel; path = ../../../../doorYolo.mlmodel; sourceTree = "<group>"; };
+		A3AC063325F5D2AC0073CC4B /* Box.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Box.swift; sourceTree = "<group>"; };
+		A3AC063D25F727050073CC4B /* BoxController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BoxController.swift; sourceTree = "<group>"; };
 		A3FCFE9425EB387200707F00 /* ViewController+BoundingBoxes.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "ViewController+BoundingBoxes.swift"; sourceTree = "<group>"; };
-		A3FCFE9725EB3A3500707F00 /* doorYolo.mlmodel */ = {isa = PBXFileReference; lastKnownFileType = file.mlmodel; name = doorYolo.mlmodel; path = ../../../../../../../var/folders/7f/8wqbl0qd1_v__rl75fc1vpph0000gn/T/doorYolo.mlmodel; sourceTree = "<group>"; };
 		A3FCFE9A25EB3AC200707F00 /* ViewController+ObjectDetection.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "ViewController+ObjectDetection.swift"; sourceTree = "<group>"; };
 		A3FCFEA025EB43D800707F00 /* ThresholdProvider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ThresholdProvider.swift; sourceTree = "<group>"; };
-		A3FCFEF325EF488900707F00 /* BubbleNode.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BubbleNode.swift; sourceTree = "<group>"; };
 		C41366B81EB80DD400EC054A /* StatusViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StatusViewController.swift; sourceTree = "<group>"; };
 		C42A71BC1E9C0AF200944367 /* FocusSquare.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FocusSquare.swift; sourceTree = "<group>"; };
-		C46356651EF9CB1A0080C8D9 /* VirtualObjectLoader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VirtualObjectLoader.swift; sourceTree = "<group>"; };
 		C46356661EF9CC480080C8D9 /* VirtualObjectARView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VirtualObjectARView.swift; sourceTree = "<group>"; };
 		C8C12A701F29277B00B011FE /* ViewController+ARSCNViewDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "ViewController+ARSCNViewDelegate.swift"; sourceTree = "<group>"; };
-		C8C2AC511F3A545C00E86BA3 /* VirtualObjectInteraction.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VirtualObjectInteraction.swift; sourceTree = "<group>"; };
-		C8D719FF1F3B7D3D0086AD64 /* VirtualObject.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VirtualObject.swift; sourceTree = "<group>"; };
-		E187105D2253C46A003B54DA /* ViewController+CoachingOverlay.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "ViewController+CoachingOverlay.swift"; sourceTree = "<group>"; };
-		E1ECC1F4706C62A3B4DE0541 /* SampleCode.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; name = SampleCode.xcconfig; path = Configuration/SampleCode.xcconfig; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -118,11 +109,8 @@
 		3929C47F1E89EC2C00E00B60 = {
 			isa = PBXGroup;
 			children = (
-				11063F3B1EBE651B0033EE6D /* README.md */,
 				3929C48A1E89EC2C00E00B60 /* RecognEyes */,
 				3929C4891E89EC2C00E00B60 /* Products */,
-				68823732822689128CA49D7D /* Configuration */,
-				616626D1A5AEF839B8BB5535 /* LICENSE */,
 			);
 			sourceTree = "<group>";
 		};
@@ -144,43 +132,16 @@
 				C8C12A701F29277B00B011FE /* ViewController+ARSCNViewDelegate.swift */,
 				1488323E1EFC378A0043E0AB /* ViewController+Actions.swift */,
 				147D76491EFC36070000FEBF /* ViewController+ObjectSelection.swift */,
-				E187105D2253C46A003B54DA /* ViewController+CoachingOverlay.swift */,
-				C8C2AC511F3A545C00E86BA3 /* VirtualObjectInteraction.swift */,
-				A3FCFEF325EF488900707F00 /* BubbleNode.swift */,
+				A3AC063D25F727050073CC4B /* BoxController.swift */,
+				A3AC063325F5D2AC0073CC4B /* Box.swift */,
 				C46356661EF9CC480080C8D9 /* VirtualObjectARView.swift */,
-				A3FCFE9725EB3A3500707F00 /* doorYolo.mlmodel */,
-				C40DF57B1EC2330700D9D59E /* Virtual Objects */,
+				A3AC063025F5CE070073CC4B /* doorYolo.mlmodel */,
 				113B64D01ECA81CA0071CBD1 /* Focus Square */,
 				1488324B1EFC3EBF0043E0AB /* Additional View Controllers */,
 				1488324A1EFC3E9C0043E0AB /* Utilities */,
 				1488324C1EFC3ED00043E0AB /* Resources */,
 			);
 			path = RecognEyes;
-			sourceTree = "<group>";
-		};
-		616626D1A5AEF839B8BB5535 /* LICENSE */ = {
-			isa = PBXGroup;
-			children = (
-				19055EBC177090706502AFD5 /* LICENSE.txt */,
-			);
-			path = LICENSE;
-			sourceTree = "<group>";
-		};
-		68823732822689128CA49D7D /* Configuration */ = {
-			isa = PBXGroup;
-			children = (
-				E1ECC1F4706C62A3B4DE0541 /* SampleCode.xcconfig */,
-			);
-			name = Configuration;
-			sourceTree = "<group>";
-		};
-		C40DF57B1EC2330700D9D59E /* Virtual Objects */ = {
-			isa = PBXGroup;
-			children = (
-				C8D719FF1F3B7D3D0086AD64 /* VirtualObject.swift */,
-				C46356651EF9CB1A0080C8D9 /* VirtualObjectLoader.swift */,
-			);
-			path = "Virtual Objects";
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -260,24 +221,21 @@
 			files = (
 				11BD822A1F09D750003F11C8 /* ViewController+ObjectSelection.swift in Sources */,
 				1488323F1EFC378A0043E0AB /* ViewController+Actions.swift in Sources */,
+				A3AC063425F5D2AC0073CC4B /* Box.swift in Sources */,
 				3929C48E1E89EC2C00E00B60 /* ViewController.swift in Sources */,
 				A3FCFE9B25EB3AC200707F00 /* ViewController+ObjectDetection.swift in Sources */,
 				C41366B91EB80DD400EC054A /* StatusViewController.swift in Sources */,
 				39C0B95A1E9C6B1F003FCA0C /* Utilities.swift in Sources */,
 				147062641F06FA790003EE03 /* VirtualObjectSelection.swift in Sources */,
-				E187105E2253C46A003B54DA /* ViewController+CoachingOverlay.swift in Sources */,
-				A3FCFEF425EF488A00707F00 /* BubbleNode.swift in Sources */,
+				A3AC063E25F727050073CC4B /* BoxController.swift in Sources */,
 				A3FCFE9525EB387200707F00 /* ViewController+BoundingBoxes.swift in Sources */,
 				C8C12A711F29277B00B011FE /* ViewController+ARSCNViewDelegate.swift in Sources */,
-				C8C2AC521F3A545C00E86BA3 /* VirtualObjectInteraction.swift in Sources */,
 				C46356671EF9CC500080C8D9 /* VirtualObjectARView.swift in Sources */,
 				148832411EFC3B250043E0AB /* FocusSquareSegment.swift in Sources */,
-				C8D71A001F3B7D3D0086AD64 /* VirtualObject.swift in Sources */,
 				C42A71BD1E9C0AF200944367 /* FocusSquare.swift in Sources */,
 				3929C48C1E89EC2C00E00B60 /* AppDelegate.swift in Sources */,
-				C46356681EF9CC530080C8D9 /* VirtualObjectLoader.swift in Sources */,
 				A3FCFEA125EB43D800707F00 /* ThresholdProvider.swift in Sources */,
-				A3FCFE9825EB3A3500707F00 /* doorYolo.mlmodel in Sources */,
+				A3AC063125F5CE070073CC4B /* doorYolo.mlmodel in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -298,7 +256,6 @@
 /* Begin XCBuildConfiguration section */
 		3929C4981E89EC2C00E00B60 /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = E1ECC1F4706C62A3B4DE0541 /* SampleCode.xcconfig */;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
 				CLANG_ANALYZER_LOCALIZABILITY_NONLOCALIZED = YES;
@@ -362,7 +319,6 @@
 		};
 		3929C4991E89EC2C00E00B60 /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = E1ECC1F4706C62A3B4DE0541 /* SampleCode.xcconfig */;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
 				CLANG_ANALYZER_LOCALIZABILITY_NONLOCALIZED = YES;
@@ -419,7 +375,6 @@
 		};
 		3929C49B1E89EC2C00E00B60 /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = E1ECC1F4706C62A3B4DE0541 /* SampleCode.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_OBJC_WEAK = YES;
@@ -440,7 +395,6 @@
 		};
 		3929C49C1E89EC2C00E00B60 /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = E1ECC1F4706C62A3B4DE0541 /* SampleCode.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_OBJC_WEAK = YES;

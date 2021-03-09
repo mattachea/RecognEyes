@@ -70,8 +70,8 @@ class ViewController: UIViewController {
 //    lazy var virtualObjectInteraction = VirtualObjectInteraction(sceneView: sceneView, viewController: self)
     
     /// Coordinates the loading and unloading of reference nodes for virtual objects.
-    let virtualObjectLoader = VirtualObjectLoader()
-    
+//    let virtualObjectLoader = VirtualObjectLoader()
+    let boxController = BoxController()
     
     
     
@@ -92,9 +92,8 @@ class ViewController: UIViewController {
     /// The detection overlay layer used to render bounding boxes
     var detectionOverlay: CALayer!
     
-    
-    
-    
+
+
     
     
     // MARK: - View Controller Life Cycle
@@ -166,16 +165,11 @@ class ViewController: UIViewController {
 
     // MARK: - Focus Square
 
-    func updateFocusSquare(isObjectVisible: Bool) {
-//        if isObjectVisible || coachingOverlay.isActive {
-        if isObjectVisible {
-            focusSquare.hide()
-        } else {
-            focusSquare.unhide()
-            statusViewController.scheduleMessage("TRY MOVING LEFT OR RIGHT", inSeconds: 5.0, messageType: .focusSquare)
-        }
-        
-        
+    func updateFocusSquare() {
+
+        focusSquare.unhide()
+        statusViewController.scheduleMessage("TRY MOVING LEFT OR RIGHT", inSeconds: 5.0, messageType: .focusSquare)
+            
         
         /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
         // Perform ray casting only when ARKit tracking is in a good state.
@@ -214,6 +208,7 @@ class ViewController: UIViewController {
                                       height: boundingBox.height)
 
         // Return a flipped and scaled rectangle corresponding to the coordinates in the sceneView
+        
         return VNImageRectForNormalizedRect(fixedBoundingBox, Int(self.sceneView.bounds.width), Int(self.sceneView.bounds.height))
     }
     

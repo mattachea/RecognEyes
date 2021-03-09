@@ -23,7 +23,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
                 can't be triggered in a production scenario.)
                 In apps where AR is an additive feature, use `isSupported` to
                 determine whether to show UI for launching AR experiences.
-            """) // For details, see https://developer.apple.com/documentation/arkit
+            """) 
         }
 
         return true

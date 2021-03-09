@@ -20,7 +20,7 @@ extension ViewController: UIGestureRecognizerDelegate {
     @IBAction func showVirtualObjectSelectionViewController() {
         // Ensure adding objects is an available action and we are not loading another object (to avoid concurrent modifications of the scene).
         
-        guard !addObjectButton.isHidden && !virtualObjectLoader.isLoading else { return }
+        guard !addObjectButton.isHidden else { return }
 
         
         statusViewController.cancelScheduledMessage(for: .contentPlacement)
@@ -29,7 +29,7 @@ extension ViewController: UIGestureRecognizerDelegate {
     
     /// Determines if the tap gesture for presenting the `VirtualObjectSelectionViewController` should be used.
     func gestureRecognizerShouldBegin(_: UIGestureRecognizer) -> Bool {
-        return virtualObjectLoader.loadedObjects.isEmpty
+        return true
 
     }
     
@@ -39,12 +39,12 @@ extension ViewController: UIGestureRecognizerDelegate {
     
     /// - Tag: restartExperience
     func restartExperience() {
-        guard isRestartAvailable, !virtualObjectLoader.isLoading else { return }
+        guard isRestartAvailable else { return }
         isRestartAvailable = false
 
         statusViewController.cancelAllScheduledMessages()
         
-        virtualObjectLoader.removeAllVirtualObjects()
+        boxController.removeAllBoxes()
 
         addObjectButton.setImage(#imageLiteral(resourceName: "add"), for: [])
         addObjectButton.setImage(#imageLiteral(resourceName: "addPressed"), for: [.highlighted])
@@ -80,16 +80,16 @@ extension ViewController: UIPopoverPresentationControllerDelegate {
               segueIdentifer == .showObjects else { return }
 
         let objectsViewController = segue.destination as! VirtualObjectSelectionViewController
-        objectsViewController.virtualObjects = VirtualObject.availableObjects
+        objectsViewController.virtualObjects = self.boxController.loadedObjects
         objectsViewController.delegate = self
         objectsViewController.sceneView = sceneView
         self.objectsViewController = objectsViewController
 
-        // Set all rows of currently placed objects to selected.
-        for object in virtualObjectLoader.loadedObjects {
-            guard let index = VirtualObject.availableObjects.firstIndex(of: object) else { continue }
-            objectsViewController.selectedVirtualObjectRows.insert(index)
-        }
+//        // Set all rows of currently placed objects to selected.
+//        for object in self.boxController.loadedObjects {
+//            guard let index = self.boxController.loadedObjects.firstIndex(of: object) else { continue }
+//            objectsViewController.selectedVirtualObjectRows.insert(index)
+//        }
     }
 
     func popoverPresentationControllerDidDismissPopover(_ popoverPresentationController: UIPopoverPresentationController) {

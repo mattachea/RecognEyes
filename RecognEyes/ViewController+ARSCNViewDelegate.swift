@@ -12,18 +12,18 @@ extension ViewController: ARSCNViewDelegate, ARSessionDelegate {
     // MARK: - ARSCNViewDelegate
     
     func renderer(_ renderer: SCNSceneRenderer, updateAtTime time: TimeInterval) {
-        let isAnyObjectInView = virtualObjectLoader.loadedObjects.contains { object in
-            return sceneView.isNode(object, insideFrustumOf: sceneView.pointOfView!)
-        }
+//        let isAnyObjectInView = virtualObjectLoader.loadedObjects.contains { object in
+//            return sceneView.isNode(object, insideFrustumOf: sceneView.pointOfView!)
+//        }
 
         
         DispatchQueue.main.async {
-            self.updateFocusSquare(isObjectVisible: isAnyObjectInView)
+            self.updateFocusSquare()
             
-            // If the object selection menu is open, update availability of items
-            if self.objectsViewController?.viewIfLoaded?.window != nil {
-                self.objectsViewController?.updateObjectAvailability()
-            }
+//            // If the object selection menu is open, update availability of items
+//            if self.objectsViewController?.viewIfLoaded?.window != nil {
+//                self.objectsViewController?.updateObjectAvailability()
+//            }
         }
     }
     
@@ -32,22 +32,18 @@ extension ViewController: ARSCNViewDelegate, ARSessionDelegate {
         DispatchQueue.main.async {
             self.statusViewController.cancelScheduledMessage(for: .planeEstimation)
             self.statusViewController.showMessage("SURFACE DETECTED")
-//            if self.virtualObjectLoader.loadedObjects.isEmpty {
-//                self.statusViewController.scheduleMessage("TAP + TO PLACE AN OBJECT", inSeconds: 7.5, messageType: .contentPlacement)
-//            }
-
         }
     }
     
-    func renderer(_ renderer: SCNSceneRenderer, didUpdate node: SCNNode, for anchor: ARAnchor) {
-        updateQueue.async {
-            if let objectAtAnchor = self.virtualObjectLoader.loadedObjects.first(where: { $0.anchor == anchor }) {
-                objectAtAnchor.simdPosition = anchor.transform.translation
-                objectAtAnchor.anchor = anchor
-            }
-
-        }
-    }
+//    func renderer(_ renderer: SCNSceneRenderer, didUpdate node: SCNNode, for anchor: ARAnchor) {
+//        updateQueue.async {
+//            if let objectAtAnchor = self.virtualObjectLoader.loadedObjects.first(where: { $0.anchor == anchor }) {
+//                objectAtAnchor.simdPosition = anchor.transform.translation
+//                objectAtAnchor.anchor = anchor
+//            }
+//
+//        }
+//    }
     
     /// - Tag: ShowVirtualContent
     func session(_ session: ARSession, cameraDidChangeTrackingState camera: ARCamera) {
@@ -61,8 +57,12 @@ extension ViewController: ARSCNViewDelegate, ARSessionDelegate {
         }
     }
 
+//    func showVirtualContent() {
+//        virtualObjectLoader.loadedObjects.forEach { $0.isHidden = false }
+//
+//    }
     func showVirtualContent() {
-        virtualObjectLoader.loadedObjects.forEach { $0.isHidden = false }
+        boxController.loadedObjects.forEach { $0.isHidden = false }
 
     }
     
@@ -98,7 +98,7 @@ extension ViewController: ARSCNViewDelegate, ARSessionDelegate {
     
     /// - Tag: HideVirtualContent
     func hideVirtualContent() {
-        virtualObjectLoader.loadedObjects.forEach { $0.isHidden = true }
+        boxController.loadedObjects.forEach { $0.isHidden = true }
 
     }
 

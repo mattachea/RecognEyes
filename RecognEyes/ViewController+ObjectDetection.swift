@@ -130,59 +130,104 @@ extension ViewController {
         
     }
     
-    // MARK: - AR ANCHOR
-    func addAnchor(observation: VNRecognizedObjectObservation) {
-        let rect = self.bounds(for: observation)
-        let text = observation.labels.first?.identifier
-        let point = CGPoint(x: rect.midX, y: rect.midY)
-        let scnHitTestResults = sceneView.hitTest(point,
-                                                  options: [SCNHitTestOption.searchMode: SCNHitTestSearchMode.all.rawValue])
-        
-        guard !scnHitTestResults.contains(where: { $0.node.name == BubbleNode.name })
-        else {
-            print("Hit test failed, node with same name found")
-            return
-            
-        }
-        print("Attempting to place node")
-        if let camera = sceneView.session.currentFrame?.camera, case .normal = camera.trackingState,
-           let query = sceneView.raycastQuery(from: point, allowing: .existingPlaneInfinite, alignment: .any),
-            let result = sceneView.session.raycast(query).first {
-            
-            print("Found plane")
-            
-            if let planeAnchor = result.anchor as? ARPlaneAnchor {
-                let bubbleNode = BubbleNode(text: text!)
-                let position = SCNVector3(result.worldTransform.columns.3.x, result.worldTransform.columns.3.y, result.worldTransform.columns.3.z)
-                print("Placing node")
-                bubbleNode.worldPosition = position
-                updateQueue.async {
-                    self.sceneView.scene.rootNode.addChildNode(bubbleNode)
-                }
-            } else {
-                print("Failed to place bubbleNode, no plane detected")
-            }
-        }
-    }
     
-    // - Tag: PlaceVirtualContent
-    func loadAndPlaceVirtualObject(object: VirtualObject) {
-        virtualObjectLoader.loadVirtualObject(object, loadedHandler: { [unowned self] loadedObject in
-
-            do {
-                let scene = try SCNScene(url: object.referenceURL, options: nil)
-                self.sceneView.prepare([scene], completionHandler: { _ in
-                    DispatchQueue.main.async {
-                        self.hideObjectLoadingUI()
-                        self.placeVirtualObject(loadedObject)
-                    }
-                })
-            } catch {
-                fatalError("Failed to load SCNScene from object.referenceURL")
+    
+    //     MARK: - AR ANCHOR
+        func addAnchor(observation: VNRecognizedObjectObservation) {
+            DispatchQueue.main.async {
+            let rect = self.bounds(for: observation)
+            let text = observation.labels.first?.identifier
+            let point = CGPoint(x: rect.midX, y: rect.midY)
+                let scnHitTestResults = self.sceneView.hitTest(point,
+                                                      options: [SCNHitTestOption.searchMode: SCNHitTestSearchMode.all.rawValue])
+            print(Box.name)
+            guard !scnHitTestResults.contains(where: { $0.node.name == Box.name })
+               
+            else {
+                print("Hit test failed, node with same name found")
+                return
+    
             }
+                if let camera = self.sceneView.session.currentFrame?.camera, case .normal = camera.trackingState,
+                   let query = self.sceneView.raycastQuery(from: point, allowing: .existingPlaneInfinite, alignment: .any),
+                   let result = self.sceneView.session.raycast(query).first {
+    
+    
+                if let _ = result.anchor as? ARPlaneAnchor {
+//                    let bubbleNode = BubbleNode(text: text!)
+                    let boxNode = Box(text: text!, raycastResult: result)
+                    
+                    self.updateQueue.async {
+                        self.sceneView.scene.rootNode.addChildNode(boxNode)
+                        self.boxController.loadedObjects.append(boxNode)
+                    }
+                    
+    
+                } else {
+                    print("Failed to place boxNode, no plane detected")
+                }
+            }
+            }
+        }
 
-        })
-        displayObjectLoadingUI()
-    }
+    
+//     MARK: - AR ANCHOR
+//    func addAnchor(observation: VNRecognizedObjectObservation) {
+//        DispatchQueue.main.async {
+//        let rect = self.bounds(for: observation)
+//        let text = observation.labels.first?.identifier
+//        let point = CGPoint(x: rect.midX, y: rect.midY)
+//            let scnHitTestResults = self.sceneView.hitTest(point,
+//                                                  options: [SCNHitTestOption.searchMode: SCNHitTestSearchMode.all.rawValue])
+//
+//        guard !scnHitTestResults.contains(where: { $0.node.name == BubbleNode.name })
+//        else {
+//            print("Hit test failed, node with same name found")
+//            return
+//
+//        }
+//        print("Attempting to place node")
+//            if let camera = self.sceneView.session.currentFrame?.camera, case .normal = camera.trackingState,
+//               let query = self.sceneView.raycastQuery(from: point, allowing: .existingPlaneInfinite, alignment: .any),
+//               let result = self.sceneView.session.raycast(query).first {
+//
+//            print("Found plane")
+//
+//            if let planeAnchor = result.anchor as? ARPlaneAnchor {
+//                let bubbleNode = BubbleNode(text: text!)
+//                let position = SCNVector3(result.worldTransform.columns.3.x, result.worldTransform.columns.3.y, result.worldTransform.columns.3.z)
+//                print("Placing node")
+//                bubbleNode.worldPosition = position
+//                self.updateQueue.async {
+//                    self.sceneView.scene.rootNode.addChildNode(bubbleNode)
+//                }
+//
+//            } else {
+//                print("Failed to place bubbleNode, no plane detected")
+//            }
+//        }
+//        }
+//    }
+
+
+    
+//    // - Tag: PlaceVirtualContent
+//    func loadAndPlaceVirtualObject(object: VirtualObject) {
+//        virtualObjectLoader.loadVirtualObject(object, loadedHandler: { [unowned self] loadedObject in
+//            do {
+//                let scene = try SCNScene(url: object.referenceURL, options: nil)
+//                self.sceneView.prepare([scene], completionHandler: { _ in
+//                    DispatchQueue.main.async {
+//                        self.hideObjectLoadingUI()
+//                        self.placeVirtualObject(loadedObject)
+//                    }
+//                })
+//            } catch {
+//                fatalError("Failed to load SCNScene from object.referenceURL")
+//            }
+//
+//        })
+//        displayObjectLoadingUI()
+//    }
 
 }

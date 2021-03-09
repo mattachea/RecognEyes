@@ -20,7 +20,6 @@ class ObjectCell: UITableViewCell {
     var modelName = "" {
         didSet {
             objectTitleLabel.text = modelName.capitalized
-            objectImageView.image = UIImage(named: modelName)
         }
     }
 }
@@ -29,20 +28,20 @@ class ObjectCell: UITableViewCell {
 
 /// A protocol for reporting which objects have been selected.
 protocol VirtualObjectSelectionViewControllerDelegate: class {
-    func virtualObjectSelectionViewController(_ selectionViewController: VirtualObjectSelectionViewController, didSelectObject: VirtualObject)
-    func virtualObjectSelectionViewController(_ selectionViewController: VirtualObjectSelectionViewController, didDeselectObject: VirtualObject)
+    func virtualObjectSelectionViewController(_ selectionViewController: VirtualObjectSelectionViewController, didSelectObject: Box)
+    func virtualObjectSelectionViewController(_ selectionViewController: VirtualObjectSelectionViewController, didDeselectObject: Box)
 }
 
 /// A custom table view controller to allow users to select `VirtualObject`s for placement in the scene.
 class VirtualObjectSelectionViewController: UITableViewController {
 
-    /// The collection of `VirtualObject`s to select from.
-    var virtualObjects = [VirtualObject]()
+    /// The collection of `Box`s to select from.
+    var virtualObjects = [Box]()
 
-    /// The rows of the currently selected `VirtualObject`s.
+    /// The rows of the currently selected `Box`s.
     var selectedVirtualObjectRows = IndexSet()
 
-    /// The rows of the 'VirtualObject's that are currently allowed to be placed.
+    /// The rows of the 'Box's that are currently allowed to be placed.
     var enabledVirtualObjectRows = Set<Int>()
 
     weak var delegate: VirtualObjectSelectionViewControllerDelegate?
@@ -74,22 +73,22 @@ class VirtualObjectSelectionViewController: UITableViewController {
         }
 
         var newEnabledVirtualObjectRows = Set<Int>()
-        for (row, object) in VirtualObject.availableObjects.enumerated() {
+        for (row, object) in virtualObjects.enumerated() {
             // Enable row always if item is already placed, in order to allow the user to remove it.
             if selectedVirtualObjectRows.contains(row) {
                 newEnabledVirtualObjectRows.insert(row)
             }
 
-            // Enable row if item can be placed at the current location
-            if let query = sceneView.getRaycastQuery(for: object.allowedAlignment),
-                let result = sceneView.castRay(for: query).first {
-                object.mostRecentInitialPlacementResult = result
-                object.raycastQuery = query
-                newEnabledVirtualObjectRows.insert(row)
-            } else {
-                object.mostRecentInitialPlacementResult = nil
-                object.raycastQuery = nil
-            }
+//            // Enable row if item can be placed at the current location
+//            if let query = sceneView.getRaycastQuery(for: object.allowedAlignment),
+//                let result = sceneView.castRay(for: query).first {
+//                object.mostRecentInitialPlacementResult = result
+//                object.raycastQuery = query
+            newEnabledVirtualObjectRows.insert(row)
+//            } else {
+//                object.mostRecentInitialPlacementResult = nil
+//                object.raycastQuery = nil
+//            }
         }
 
         // Only reload changed rows
@@ -131,7 +130,8 @@ class VirtualObjectSelectionViewController: UITableViewController {
             fatalError("Expected `\(ObjectCell.self)` type for reuseIdentifier \(ObjectCell.reuseIdentifier). Check the configuration in Main.storyboard.")
         }
 
-        cell.modelName = virtualObjects[indexPath.row].modelName
+        cell.modelName = virtualObjects[indexPath.row].nodeName
+        
 
         if selectedVirtualObjectRows.contains(indexPath.row) {
             cell.accessoryType = .checkmark
@@ -165,3 +165,4 @@ class VirtualObjectSelectionViewController: UITableViewController {
         cell?.backgroundColor = .clear
     }
 }
+
