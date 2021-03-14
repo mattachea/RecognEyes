@@ -154,7 +154,6 @@ extension ViewController {
     
     
                 if let _ = result.anchor as? ARPlaneAnchor {
-//                    let bubbleNode = BubbleNode(text: text!)
                     let boxNode = Box(text: text!, raycastResult: result)
                     
                     self.updateQueue.async {

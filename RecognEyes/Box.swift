@@ -12,18 +12,12 @@ import ARKit
 class Box : SCNNode {
     static let name = String(describing: Box.self)
     
-    
     let bubbleDepth: CGFloat = 0.01
-    
     
     var objectName = ""
     var nodeName: String {
         return objectName
     }
-
-    
-//    var anchor: ARAnchor?
-//    var raycastQuery: ARRaycastQuery?
     
     init(text: String, raycastResult: ARRaycastResult) {
         super.init()

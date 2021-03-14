@@ -59,7 +59,7 @@ class VirtualObjectSelectionViewController: UITableViewController {
     override func viewWillLayoutSubviews() {
         preferredContentSize = CGSize(width: 250, height: tableView.contentSize.height)
     }
-
+    
     func updateObjectAvailability() {
         guard let sceneView = sceneView else { return }
 
@@ -74,21 +74,7 @@ class VirtualObjectSelectionViewController: UITableViewController {
 
         var newEnabledVirtualObjectRows = Set<Int>()
         for (row, object) in virtualObjects.enumerated() {
-            // Enable row always if item is already placed, in order to allow the user to remove it.
-            if selectedVirtualObjectRows.contains(row) {
-                newEnabledVirtualObjectRows.insert(row)
-            }
-
-//            // Enable row if item can be placed at the current location
-//            if let query = sceneView.getRaycastQuery(for: object.allowedAlignment),
-//                let result = sceneView.castRay(for: query).first {
-//                object.mostRecentInitialPlacementResult = result
-//                object.raycastQuery = query
             newEnabledVirtualObjectRows.insert(row)
-//            } else {
-//                object.mostRecentInitialPlacementResult = nil
-//                object.raycastQuery = nil
-//            }
         }
 
         // Only reload changed rows

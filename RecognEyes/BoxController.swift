@@ -11,15 +11,8 @@ import ARKit
 
 class BoxController {
     var loadedObjects = [Box]()
-    
-    
-    
-    
-    
-    
-    
-    
-    
+    var selectedObjects = IndexSet()
+
     // MARK: - Removing Objects
 
     func removeAllBoxes() {
@@ -32,15 +25,10 @@ class BoxController {
     /// - Tag: RemoveVirtualObject
     func removeBox(at index: Int) {
         guard loadedObjects.indices.contains(index) else { return }
-
         // Remove the visual node from the scene graph.
         loadedObjects[index].removeFromParentNode()
         // Recoup resources allocated by the object.
         loadedObjects.remove(at: index)
     }
 
-    
-    
-    
-    
 }

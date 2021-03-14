@@ -64,10 +64,8 @@ class FocusSquare: SCNNode {
                 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
                 if let planeAnchor = raycastResult.anchor as? ARPlaneAnchor {
                     displayAsClosed(for: raycastResult, planeAnchor: planeAnchor, camera: camera)
-                    print("Found a plane anchor")
                 } else {
                     displayAsOpen(for: raycastResult, camera: camera)
-                    print("Not a plane anchor")
                 }
             }
         }

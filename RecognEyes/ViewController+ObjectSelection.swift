@@ -13,11 +13,16 @@ extension ViewController: VirtualObjectSelectionViewControllerDelegate {
     // MARK: - VirtualObjectSelectionViewControllerDelegate
     // - Tag: Turn on sound
     func virtualObjectSelectionViewController(_: VirtualObjectSelectionViewController, didSelectObject object: Box) {
-        
+        print("object selected")
+        guard let index = self.boxController.loadedObjects.firstIndex(of: object) else {return}
+        self.boxController.selectedObjects.insert(index)
     }
 
     func virtualObjectSelectionViewController(_: VirtualObjectSelectionViewController, didDeselectObject object: Box) {
-        
+        print("object deselected")
+        guard let index = self.boxController.loadedObjects.firstIndex(of: object) else {return}
+        self.boxController.selectedObjects.remove(index)
+
     }
 
     // MARK: Object Loading UI

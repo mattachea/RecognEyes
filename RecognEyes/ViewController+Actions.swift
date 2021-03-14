@@ -82,14 +82,10 @@ extension ViewController: UIPopoverPresentationControllerDelegate {
         let objectsViewController = segue.destination as! VirtualObjectSelectionViewController
         objectsViewController.virtualObjects = self.boxController.loadedObjects
         objectsViewController.delegate = self
+        objectsViewController.selectedVirtualObjectRows = self.boxController.selectedObjects
         objectsViewController.sceneView = sceneView
         self.objectsViewController = objectsViewController
 
-//        // Set all rows of currently placed objects to selected.
-//        for object in self.boxController.loadedObjects {
-//            guard let index = self.boxController.loadedObjects.firstIndex(of: object) else { continue }
-//            objectsViewController.selectedVirtualObjectRows.insert(index)
-//        }
     }
 
     func popoverPresentationControllerDidDismissPopover(_ popoverPresentationController: UIPopoverPresentationController) {

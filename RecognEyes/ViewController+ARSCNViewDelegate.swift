@@ -12,18 +12,14 @@ extension ViewController: ARSCNViewDelegate, ARSessionDelegate {
     // MARK: - ARSCNViewDelegate
     
     func renderer(_ renderer: SCNSceneRenderer, updateAtTime time: TimeInterval) {
-//        let isAnyObjectInView = virtualObjectLoader.loadedObjects.contains { object in
-//            return sceneView.isNode(object, insideFrustumOf: sceneView.pointOfView!)
-//        }
 
-        
         DispatchQueue.main.async {
             self.updateFocusSquare()
             
-//            // If the object selection menu is open, update availability of items
-//            if self.objectsViewController?.viewIfLoaded?.window != nil {
-//                self.objectsViewController?.updateObjectAvailability()
-//            }
+            // If the object selection menu is open, update availability of items
+            if self.objectsViewController?.viewIfLoaded?.window != nil {
+                self.objectsViewController?.updateObjectAvailability()
+            }
         }
     }
     
@@ -34,16 +30,6 @@ extension ViewController: ARSCNViewDelegate, ARSessionDelegate {
             self.statusViewController.showMessage("SURFACE DETECTED")
         }
     }
-    
-//    func renderer(_ renderer: SCNSceneRenderer, didUpdate node: SCNNode, for anchor: ARAnchor) {
-//        updateQueue.async {
-//            if let objectAtAnchor = self.virtualObjectLoader.loadedObjects.first(where: { $0.anchor == anchor }) {
-//                objectAtAnchor.simdPosition = anchor.transform.translation
-//                objectAtAnchor.anchor = anchor
-//            }
-//
-//        }
-//    }
     
     /// - Tag: ShowVirtualContent
     func session(_ session: ARSession, cameraDidChangeTrackingState camera: ARCamera) {
@@ -57,13 +43,8 @@ extension ViewController: ARSCNViewDelegate, ARSessionDelegate {
         }
     }
 
-//    func showVirtualContent() {
-//        virtualObjectLoader.loadedObjects.forEach { $0.isHidden = false }
-//
-//    }
     func showVirtualContent() {
         boxController.loadedObjects.forEach { $0.isHidden = false }
-
     }
     
     
