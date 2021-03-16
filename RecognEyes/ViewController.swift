@@ -73,7 +73,8 @@ class ViewController: UIViewController {
 //    let virtualObjectLoader = VirtualObjectLoader()
     let boxController = BoxController()
     
-    
+    /// Source for audio playback
+    var audioSource: SCNAudioSource!
     
     /// Marks if the AR experience is available for restart.
     var isRestartAvailable = true
@@ -116,6 +117,9 @@ class ViewController: UIViewController {
         // Set up Object Detection
         setupObjectDetection()
         
+        // Set up audio source
+        setUpAudio()
+        
         //Hook up status view controller callback(s).
         statusViewController.restartExperienceHandler = { [unowned self] in
             self.restartExperience()
@@ -154,7 +158,7 @@ class ViewController: UIViewController {
 //        virtualObjectInteraction.selectedObject = nil
         
         let configuration = ARWorldTrackingConfiguration()
-        configuration.planeDetection = [.horizontal, .vertical]
+        configuration.planeDetection = [.vertical]
         if #available(iOS 12.0, *) {
             configuration.environmentTexturing = .automatic
         }
@@ -212,11 +216,18 @@ class ViewController: UIViewController {
         return VNImageRectForNormalizedRect(fixedBoundingBox, Int(self.sceneView.bounds.width), Int(self.sceneView.bounds.height))
     }
     
-   
+    // MARK: - Sound
+    private func setUpAudio() {
+        // Instantiate the audio source
+        audioSource = SCNAudioSource(fileNamed: "fireplace.mp3")!
+        // As an environmental sound layer, audio should play indefinitely
+        audioSource.loops = true
+        // Decode the audio from disk ahead of time to prevent a delay in playback
+        audioSource.load()
+    }
             
     
     // MARK: - Error handling
-    
     func displayErrorMessage(title: String, message: String) {
         // Blur the background.
         blurView.isHidden = false

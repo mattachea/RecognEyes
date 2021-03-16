@@ -12,9 +12,21 @@ import ARKit
 class BoxController {
     var loadedObjects = [Box]()
     var selectedObjects = IndexSet()
+    
+    // MARK: - Sound
+    func playSound(at box: Box, audioSource: SCNAudioSource) {
+        // Ensure there is only one audio player
+        box.removeAllAudioPlayers()
+        // Create a player from the source and add it to `objectNode`        
+        box.addAudioPlayer(SCNAudioPlayer(source: audioSource))
+    }
+    
+    func stopSound(at box: Box) {
+        box.removeAllAudioPlayers()
+    }
+
 
     // MARK: - Removing Objects
-
     func removeAllBoxes() {
         // Reverse the indices so we don't trample over indices as objects are removed.
         for index in loadedObjects.indices.reversed() {

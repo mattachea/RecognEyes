@@ -18,6 +18,7 @@
 		3929C49F1E89EE4400E00B60 /* Models.scnassets in Resources */ = {isa = PBXBuildFile; fileRef = 3929C49E1E89EE4400E00B60 /* Models.scnassets */; };
 		39C0B95A1E9C6B1F003FCA0C /* Utilities.swift in Sources */ = {isa = PBXBuildFile; fileRef = 39C0B9581E9C6B1F003FCA0C /* Utilities.swift */; };
 		39D8DC1B1E8ADAE600386B05 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 39D8DC1A1E8ADAE600386B05 /* LaunchScreen.storyboard */; };
+		A30E07CF2600653200BC6886 /* fireplace.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = A30E07CE2600653200BC6886 /* fireplace.mp3 */; };
 		A3AC063125F5CE070073CC4B /* doorYolo.mlmodel in Sources */ = {isa = PBXBuildFile; fileRef = A3AC063025F5CE070073CC4B /* doorYolo.mlmodel */; };
 		A3AC063425F5D2AC0073CC4B /* Box.swift in Sources */ = {isa = PBXBuildFile; fileRef = A3AC063325F5D2AC0073CC4B /* Box.swift */; };
 		A3AC063E25F727050073CC4B /* BoxController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A3AC063D25F727050073CC4B /* BoxController.swift */; };
@@ -44,6 +45,7 @@
 		3929C49E1E89EE4400E00B60 /* Models.scnassets */ = {isa = PBXFileReference; lastKnownFileType = wrapper.scnassets; path = Models.scnassets; sourceTree = "<group>"; };
 		39C0B9581E9C6B1F003FCA0C /* Utilities.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Utilities.swift; sourceTree = "<group>"; };
 		39D8DC1A1E8ADAE600386B05 /* LaunchScreen.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = LaunchScreen.storyboard; sourceTree = "<group>"; };
+		A30E07CE2600653200BC6886 /* fireplace.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; name = fireplace.mp3; path = "../../../../../../Downloads/CreatingAnImmersiveARExperienceWithAudio/Audio in ARKit/Resources/fireplace.mp3"; sourceTree = "<group>"; };
 		A3AC063025F5CE070073CC4B /* doorYolo.mlmodel */ = {isa = PBXFileReference; lastKnownFileType = file.mlmodel; name = doorYolo.mlmodel; path = ../../../../doorYolo.mlmodel; sourceTree = "<group>"; };
 		A3AC063325F5D2AC0073CC4B /* Box.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Box.swift; sourceTree = "<group>"; };
 		A3AC063D25F727050073CC4B /* BoxController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BoxController.swift; sourceTree = "<group>"; };
@@ -97,6 +99,7 @@
 		1488324C1EFC3ED00043E0AB /* Resources */ = {
 			isa = PBXGroup;
 			children = (
+				A30E07CE2600653200BC6886 /* fireplace.mp3 */,
 				3929C49E1E89EE4400E00B60 /* Models.scnassets */,
 				3929C4921E89EC2C00E00B60 /* Assets.xcassets */,
 				3929C4971E89EC2C00E00B60 /* Info.plist */,
@@ -207,6 +210,7 @@
 			files = (
 				3929C49F1E89EE4400E00B60 /* Models.scnassets in Resources */,
 				39D8DC1B1E8ADAE600386B05 /* LaunchScreen.storyboard in Resources */,
+				A30E07CF2600653200BC6886 /* fireplace.mp3 in Resources */,
 				3929C4931E89EC2C00E00B60 /* Assets.xcassets in Resources */,
 				3929C4911E89EC2C00E00B60 /* Main.storyboard in Resources */,
 			);

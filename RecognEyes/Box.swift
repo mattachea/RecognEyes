@@ -43,14 +43,15 @@ class Box : SCNNode {
         let box = SCNBox(width: 0.5, height: 1, length: 0.02, chamferRadius: 0.02)
         
         let boxNode = SCNNode(geometry: box)
+//
+//        positionNode(node: boxNode, at: raycastResult)
+//        positionNode(node: bubbleNode, at: raycastResult)
         
-        positionNode(node: boxNode, at: raycastResult)
-        positionNode(node: bubbleNode, at: raycastResult)
 
         boxNode.name = Self.name
         boxNode.geometry?.materials.first?.transparency = 0.6
 
-        addChildNode(bubbleNode)
+        boxNode.addChildNode(bubbleNode)
         addChildNode(boxNode)
         let billboardConstraint = SCNBillboardConstraint()
         billboardConstraint.freeAxes = SCNBillboardAxis.Y
@@ -65,12 +66,12 @@ class Box : SCNNode {
     
     
     func positionNode(node: SCNNode, at rayCastResult: ARRaycastResult) {
-            //1
-            node.transform = SCNMatrix4(rayCastResult.anchor!.transform)
-            //2
-            node.eulerAngles = SCNVector3Make(node.eulerAngles.x + (Float.pi / 2), node.eulerAngles.y, node.eulerAngles.z)
-            //3
-            let position = SCNVector3Make(rayCastResult.worldTransform.columns.3.x + node.geometry!.boundingBox.min.z, rayCastResult.worldTransform.columns.3.y, rayCastResult.worldTransform.columns.3.z)
-            node.position = position
+          
+        node.transform = SCNMatrix4(rayCastResult.anchor!.transform)
+            
+        node.eulerAngles = SCNVector3Make(node.eulerAngles.x + (Float.pi / 2), node.eulerAngles.y, node.eulerAngles.z)
+           
+        node.position = SCNVector3Make(rayCastResult.worldTransform.columns.3.x + node.geometry!.boundingBox.min.z, rayCastResult.worldTransform.columns.3.y, rayCastResult.worldTransform.columns.3.z)
+
         }
 }

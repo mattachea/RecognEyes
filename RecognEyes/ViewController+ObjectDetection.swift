@@ -14,7 +14,7 @@ import ARKit
 
 
 extension ViewController {
-
+    
     
     func setupObjectDetection() {
         // Load the detection models
@@ -40,10 +40,10 @@ extension ViewController {
             // The frame is always oriented based on the camera sensor,
             // so in most cases Vision needs to rotate it for the model to work as expected.
             let orientation = UIDevice.current.orientation
-
+            
             // The image captured by the camera
             let image = frame.capturedImage
-
+            
             let imageOrientation: CGImagePropertyOrientation
             switch orientation {
             case .portrait:
@@ -55,14 +55,14 @@ extension ViewController {
             case .landscapeRight:
                 imageOrientation = .down
             case .unknown:
-//                print("The device orientation is unknown, the predictions may be affected")
+                //                print("The device orientation is unknown, the predictions may be affected")
                 fallthrough
             default:
                 // By default keep the last orientation
                 // This applies for faceUp and faceDown
                 imageOrientation = self.lastOrientation
             }
-
+            
             // For object detection, keeping track of the image buffer size
             // to know how to draw bounding boxes based on relative values.
             if self.bufferSize == nil || self.lastOrientation != imageOrientation {
@@ -77,25 +77,25 @@ extension ViewController {
                                              height: pixelBufferWidth)
                 }
             }
-
-
+            
+            
             /// - Tag: PassingFramesToVision
-
+            
             // Invoke a VNRequestHandler with that image
             let handler = VNImageRequestHandler(cvPixelBuffer: image, orientation: imageOrientation, options: [:])
-
+            
             do {
                 try handler.perform([self.objectDetectionRequest])
             } catch {
                 print("CoreML request failed with error: \(error.localizedDescription)")
             }
-
+            
         }
     }
     
-
     
-
+    
+    
     /// Handles results from the detection requests
     ///
     /// - parameters:
@@ -115,7 +115,7 @@ extension ViewController {
             print("Request did not return recognized objects: \(request.results?.debugDescription ?? "[No results]")")
             return
         }
-
+        
         guard !observations.isEmpty else {
             removeBoxes()
             return
@@ -131,102 +131,45 @@ extension ViewController {
     }
     
     
-    
     //     MARK: - AR ANCHOR
-        func addAnchor(observation: VNRecognizedObjectObservation) {
-            DispatchQueue.main.async {
+    func addAnchor(observation: VNRecognizedObjectObservation) {
+        DispatchQueue.main.async {
             let rect = self.bounds(for: observation)
             let text = observation.labels.first?.identifier
             let point = CGPoint(x: rect.midX, y: rect.midY)
-                let scnHitTestResults = self.sceneView.hitTest(point,
-                                                      options: [SCNHitTestOption.searchMode: SCNHitTestSearchMode.all.rawValue])
-            print(Box.name)
+            let scnHitTestResults = self.sceneView.hitTest(point,
+                                                           options: [SCNHitTestOption.searchMode: SCNHitTestSearchMode.all.rawValue])
             guard !scnHitTestResults.contains(where: { $0.node.name == Box.name })
-               
+            
             else {
-                print("Hit test failed, node with same name found")
+                //print("Hit test failed, node with same name found")
                 return
-    
+                
             }
-                if let camera = self.sceneView.session.currentFrame?.camera, case .normal = camera.trackingState,
-                   let query = self.sceneView.raycastQuery(from: point, allowing: .existingPlaneInfinite, alignment: .any),
-                   let result = self.sceneView.session.raycast(query).first {
-    
-    
+            if let camera = self.sceneView.session.currentFrame?.camera, case .normal = camera.trackingState,
+               let query = self.sceneView.raycastQuery(from: point, allowing: .existingPlaneInfinite, alignment: .any),
+               let result = self.sceneView.session.raycast(query).first {
+                
+                
                 if let _ = result.anchor as? ARPlaneAnchor {
                     let boxNode = Box(text: text!, raycastResult: result)
+                    self.positionNode(box: boxNode, at: result)
                     
                     self.updateQueue.async {
                         self.sceneView.scene.rootNode.addChildNode(boxNode)
                         self.boxController.loadedObjects.append(boxNode)
                     }
                     
-    
                 } else {
-                    print("Failed to place boxNode, no plane detected")
+//                    print("Failed to place boxNode, no plane detected")
                 }
             }
-            }
         }
-
-    
-//     MARK: - AR ANCHOR
-//    func addAnchor(observation: VNRecognizedObjectObservation) {
-//        DispatchQueue.main.async {
-//        let rect = self.bounds(for: observation)
-//        let text = observation.labels.first?.identifier
-//        let point = CGPoint(x: rect.midX, y: rect.midY)
-//            let scnHitTestResults = self.sceneView.hitTest(point,
-//                                                  options: [SCNHitTestOption.searchMode: SCNHitTestSearchMode.all.rawValue])
-//
-//        guard !scnHitTestResults.contains(where: { $0.node.name == BubbleNode.name })
-//        else {
-//            print("Hit test failed, node with same name found")
-//            return
-//
-//        }
-//        print("Attempting to place node")
-//            if let camera = self.sceneView.session.currentFrame?.camera, case .normal = camera.trackingState,
-//               let query = self.sceneView.raycastQuery(from: point, allowing: .existingPlaneInfinite, alignment: .any),
-//               let result = self.sceneView.session.raycast(query).first {
-//
-//            print("Found plane")
-//
-//            if let planeAnchor = result.anchor as? ARPlaneAnchor {
-//                let bubbleNode = BubbleNode(text: text!)
-//                let position = SCNVector3(result.worldTransform.columns.3.x, result.worldTransform.columns.3.y, result.worldTransform.columns.3.z)
-//                print("Placing node")
-//                bubbleNode.worldPosition = position
-//                self.updateQueue.async {
-//                    self.sceneView.scene.rootNode.addChildNode(bubbleNode)
-//                }
-//
-//            } else {
-//                print("Failed to place bubbleNode, no plane detected")
-//            }
-//        }
-//        }
-//    }
-
-
-    
-//    // - Tag: PlaceVirtualContent
-//    func loadAndPlaceVirtualObject(object: VirtualObject) {
-//        virtualObjectLoader.loadVirtualObject(object, loadedHandler: { [unowned self] loadedObject in
-//            do {
-//                let scene = try SCNScene(url: object.referenceURL, options: nil)
-//                self.sceneView.prepare([scene], completionHandler: { _ in
-//                    DispatchQueue.main.async {
-//                        self.hideObjectLoadingUI()
-//                        self.placeVirtualObject(loadedObject)
-//                    }
-//                })
-//            } catch {
-//                fatalError("Failed to load SCNScene from object.referenceURL")
-//            }
-//
-//        })
-//        displayObjectLoadingUI()
-//    }
-
+    }
+    func positionNode(box: Box, at rayCastResult: ARRaycastResult) {
+        box.transform = SCNMatrix4(rayCastResult.anchor!.transform)
+        box.eulerAngles = SCNVector3Make(box.eulerAngles.x + (Float.pi / 2), box.eulerAngles.y, box.eulerAngles.z)
+        box.position = SCNVector3Make(rayCastResult.worldTransform.columns.3.x, rayCastResult.worldTransform.columns.3.y, rayCastResult.worldTransform.columns.3.z)
+        
+    }
 }

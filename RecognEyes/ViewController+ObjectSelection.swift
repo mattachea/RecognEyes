@@ -11,28 +11,29 @@ import ARKit
 extension ViewController: VirtualObjectSelectionViewControllerDelegate {
 
     // MARK: - VirtualObjectSelectionViewControllerDelegate
+    
     // - Tag: Turn on sound
     func virtualObjectSelectionViewController(_: VirtualObjectSelectionViewController, didSelectObject object: Box) {
-        print("object selected")
+        print("object selected, starting sound")
         guard let index = self.boxController.loadedObjects.firstIndex(of: object) else {return}
         self.boxController.selectedObjects.insert(index)
+        self.boxController.playSound(at: object, audioSource: audioSource)
     }
 
+    // - Tag: Turn off sound
     func virtualObjectSelectionViewController(_: VirtualObjectSelectionViewController, didDeselectObject object: Box) {
-        print("object deselected")
+        print("object deselected, stopping sound")
         guard let index = self.boxController.loadedObjects.firstIndex(of: object) else {return}
         self.boxController.selectedObjects.remove(index)
-
+        self.boxController.stopSound(at: object)
     }
 
     // MARK: Object Loading UI
-
+    
     func displayObjectLoadingUI() {
         // Show progress indicator.
         spinner.startAnimating()
-
         addObjectButton.setImage(#imageLiteral(resourceName: "buttonring"), for: [])
-
         addObjectButton.isEnabled = false
         isRestartAvailable = false
     }
@@ -40,10 +41,8 @@ extension ViewController: VirtualObjectSelectionViewControllerDelegate {
     func hideObjectLoadingUI() {
         // Hide progress indicator.
         spinner.stopAnimating()
-
         addObjectButton.setImage(#imageLiteral(resourceName: "add"), for: [])
         addObjectButton.setImage(#imageLiteral(resourceName: "addPressed"), for: [.highlighted])
-
         addObjectButton.isEnabled = true
         isRestartAvailable = true
     }
