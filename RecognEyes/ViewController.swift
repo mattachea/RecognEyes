@@ -9,6 +9,7 @@ import ARKit
 import SceneKit
 import UIKit
 import Vision
+import AVFoundation
 
 class ViewController: UIViewController {
     
@@ -94,8 +95,10 @@ class ViewController: UIViewController {
     var detectionOverlay: CALayer!
     
 
+    // To convert text to speech
+    let synthesizer = AVSpeechSynthesizer()
+    /// Concurrent queue to be used for model predictions
 
-    
     
     // MARK: - View Controller Life Cycle
     
@@ -226,6 +229,14 @@ class ViewController: UIViewController {
         audioSource.load()
     }
             
+    
+    // MARK: - SPEECH
+    func sayDescription(text: String) {
+        let utterance = AVSpeechUtterance(string: text)
+        utterance.voice = AVSpeechSynthesisVoice(language: "en-US")
+        utterance.rate = 0.5
+        synthesizer.speak(utterance)
+    }
     
     // MARK: - Error handling
     func displayErrorMessage(title: String, message: String) {

@@ -24,7 +24,7 @@ class Box : SCNNode {
         self.objectName = text
         //text
         let bubble = SCNText(string: text, extrusionDepth: CGFloat(bubbleDepth))
-        let font = UIFont(name: "Futura", size: 0.05)
+        let font = UIFont(name: "Futura", size: 0.2)
         bubble.font = font
         bubble.alignmentMode = CATextLayerAlignmentMode.center.rawValue
         bubble.firstMaterial?.diffuse.contents = UIColor.orange
@@ -36,11 +36,11 @@ class Box : SCNNode {
         bubbleNode.pivot = SCNMatrix4MakeTranslation((maxBound.x - minBound.x) / 2,
                                                      minBound.y,
                                                      Float(bubbleDepth) / 2)
-        bubbleNode.scale = SCNVector3Make(0.2, 0.2, 0.2)
+        bubbleNode.scale = SCNVector3Make(0.5, 0.5, 0.5)
 
 
         //box
-        let box = SCNBox(width: 0.5, height: 1, length: 0.02, chamferRadius: 0.02)
+        let box = SCNBox(width: 0.75, height: 1.5, length: 0.02, chamferRadius: 0.02)
         
         let boxNode = SCNNode(geometry: box)
 //
@@ -57,8 +57,7 @@ class Box : SCNNode {
         billboardConstraint.freeAxes = SCNBillboardAxis.Y
         bubbleNode.constraints = [billboardConstraint]
         
-        
-    }
+        }
     
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
@@ -66,11 +65,11 @@ class Box : SCNNode {
     
     
     func positionNode(node: SCNNode, at rayCastResult: ARRaycastResult) {
-          
+        
         node.transform = SCNMatrix4(rayCastResult.anchor!.transform)
-            
+        
         node.eulerAngles = SCNVector3Make(node.eulerAngles.x + (Float.pi / 2), node.eulerAngles.y, node.eulerAngles.z)
-           
+        
         node.position = SCNVector3Make(rayCastResult.worldTransform.columns.3.x + node.geometry!.boundingBox.min.z, rayCastResult.worldTransform.columns.3.y, rayCastResult.worldTransform.columns.3.z)
 
         }

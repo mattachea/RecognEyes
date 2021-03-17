@@ -150,9 +150,12 @@ extension ViewController {
             let shapeLayer = self.createRoundedRectLayerWithBounds(objectBounds)
             let textLayer = self.createTextSubLayerInBounds(objectBounds, identifier: classification.identifier, confidence: classification.confidence)
 //            print(classification.identifier, classification.confidence, objectBounds)
+            
             shapeLayer.addSublayer(textLayer)
             self.detectionOverlay.addSublayer(shapeLayer)
             self.updateLayerGeometry()
+            
+            
         }
     }  
 }

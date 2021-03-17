@@ -127,15 +127,23 @@ extension ViewController {
             return
         }
         
+        
         drawBox(observation: observation)
         addAnchor(observation: observation)
         
     }
     
     
+    
+    
     //     MARK: - AR ANCHOR
     func addAnchor(observation: VNRecognizedObjectObservation) {
         guard !coachingOverlay.isActive else { return }
+        
+        guard let classification = observation.labels.first else {
+                print("confidence too low")
+                return
+        }
         
         DispatchQueue.main.async {
             let rect = self.bounds(for: observation)
@@ -162,6 +170,8 @@ extension ViewController {
                     self.updateQueue.async {
                         self.sceneView.scene.rootNode.addChildNode(boxNode)
                         self.boxController.loadedObjects.append(boxNode)
+                        print(classification.identifier)
+                        self.sayDescription(text: classification.identifier + " detected")
                     }
                     
                 } else {
