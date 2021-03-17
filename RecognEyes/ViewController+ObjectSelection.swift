@@ -16,16 +16,19 @@ extension ViewController: VirtualObjectSelectionViewControllerDelegate {
     func virtualObjectSelectionViewController(_: VirtualObjectSelectionViewController, didSelectObject object: Box) {
         print("object selected, starting sound")
         
-        //remove any previously selected objects and turn off sound
+        //remove any previously selected objects and turn off positional audio and distance sound
         self.boxController.selectedObjects.forEach{ index in
             self.boxController.stopSound(at: self.boxController.loadedObjects[index])
+            self.boxController.stopSpeakDistance()
         }
+        
         // empty set
         self.boxController.selectedObjects = IndexSet()
         
         guard let index = self.boxController.loadedObjects.firstIndex(of: object) else {return}
         self.boxController.selectedObjects.insert(index)
         self.boxController.playSound(at: object, audioSource: audioSource)
+        self.boxController.speakDistance(from: self.sceneView.session, to: object, synthesizer: self.synthesizer)
     }
 
     // - Tag: Turn off sound
@@ -34,6 +37,7 @@ extension ViewController: VirtualObjectSelectionViewControllerDelegate {
         guard let index = self.boxController.loadedObjects.firstIndex(of: object) else {return}
         self.boxController.selectedObjects.remove(index)
         self.boxController.stopSound(at: object)
+        self.boxController.stopSpeakDistance()
     }
 
     // MARK: Object Loading UI

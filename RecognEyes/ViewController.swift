@@ -88,7 +88,6 @@ class ViewController: UIViewController {
         return sceneView.session
     }
     
-    
     /// Layer used to host detectionOverlay layer
     var rootLayer: CALayer!
     /// The detection overlay layer used to render bounding boxes

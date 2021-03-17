@@ -12,8 +12,32 @@ import ARKit
 class BoxController {
     var loadedObjects = [Box]()
     var selectedObjects = IndexSet()
+    var speakDistanceTimer = Timer()
     
-    // MARK: - Sound
+    //MARK: -Distance
+    func speakDistance(from session: ARSession , to box: Box, synthesizer: AVSpeechSynthesizer) {
+        
+        speakDistanceTimer = Timer.scheduledTimer(withTimeInterval: 2, repeats: true) { timer in
+            let distance = self.getDistance(from: session.currentFrame!.camera, to: box)
+            let utterance = AVSpeechUtterance(string: String(distance))
+            utterance.voice = AVSpeechSynthesisVoice(language: "en-US")
+            utterance.rate = 0.5
+            synthesizer.speak(utterance)
+        }
+    }
+    
+    
+    func stopSpeakDistance() {
+        speakDistanceTimer.invalidate()
+    }
+    
+    
+    // distance in feet to the nearest foot
+    func getDistance(from camera: ARCamera,  to box: Box) -> Int {
+        return Int(round(simd_distance(box.simdTransform.columns.3, (camera.transform.columns.3)) * 3.21)) //convert meters to feet
+    }
+    
+    // MARK: - Positional Audio
     func playSound(at box: Box, audioSource: SCNAudioSource) {
         // Ensure there is only one audio player
         box.removeAllAudioPlayers()
