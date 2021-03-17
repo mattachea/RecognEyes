@@ -15,6 +15,14 @@ extension ViewController: VirtualObjectSelectionViewControllerDelegate {
     // - Tag: Turn on sound
     func virtualObjectSelectionViewController(_: VirtualObjectSelectionViewController, didSelectObject object: Box) {
         print("object selected, starting sound")
+        
+        //remove any previously selected objects and turn off sound
+        self.boxController.selectedObjects.forEach{ index in
+            self.boxController.stopSound(at: self.boxController.loadedObjects[index])
+        }
+        // empty set
+        self.boxController.selectedObjects = IndexSet()
+        
         guard let index = self.boxController.loadedObjects.firstIndex(of: object) else {return}
         self.boxController.selectedObjects.insert(index)
         self.boxController.playSound(at: object, audioSource: audioSource)

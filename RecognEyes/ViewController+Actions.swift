@@ -85,7 +85,6 @@ extension ViewController: UIPopoverPresentationControllerDelegate {
         objectsViewController.selectedVirtualObjectRows = self.boxController.selectedObjects
         objectsViewController.sceneView = sceneView
         self.objectsViewController = objectsViewController
-
     }
 
     func popoverPresentationControllerDidDismissPopover(_ popoverPresentationController: UIPopoverPresentationController) {

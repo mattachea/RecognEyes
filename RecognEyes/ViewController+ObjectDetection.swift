@@ -35,61 +35,63 @@ extension ViewController {
     
     
     func detect(frame: ARFrame) {
-        predictionQueue.async {
-            /// - Tag: MappingOrientation
-            // The frame is always oriented based on the camera sensor,
-            // so in most cases Vision needs to rotate it for the model to work as expected.
-            let orientation = UIDevice.current.orientation
-            
-            // The image captured by the camera
-            let image = frame.capturedImage
-            
-            let imageOrientation: CGImagePropertyOrientation
-            switch orientation {
-            case .portrait:
-                imageOrientation = .right
-            case .portraitUpsideDown:
-                imageOrientation = .left
-            case .landscapeLeft:
-                imageOrientation = .up
-            case .landscapeRight:
-                imageOrientation = .down
-            case .unknown:
-                //                print("The device orientation is unknown, the predictions may be affected")
-                fallthrough
-            default:
-                // By default keep the last orientation
-                // This applies for faceUp and faceDown
-                imageOrientation = self.lastOrientation
-            }
-            
-            // For object detection, keeping track of the image buffer size
-            // to know how to draw bounding boxes based on relative values.
-            if self.bufferSize == nil || self.lastOrientation != imageOrientation {
-                self.lastOrientation = imageOrientation
-                let pixelBufferWidth = CVPixelBufferGetWidth(image)
-                let pixelBufferHeight = CVPixelBufferGetHeight(image)
-                if [.up, .down].contains(imageOrientation) {
-                    self.bufferSize = CGSize(width: pixelBufferWidth,
-                                             height: pixelBufferHeight)
-                } else {
-                    self.bufferSize = CGSize(width: pixelBufferHeight,
-                                             height: pixelBufferWidth)
+        //only do detection when camera in a good state.
+        if let camera = session.currentFrame?.camera, case .normal = camera.trackingState {
+            predictionQueue.async {
+                /// - Tag: MappingOrientation
+                // The frame is always oriented based on the camera sensor,
+                // so in most cases Vision needs to rotate it for the model to work as expected.
+                let orientation = UIDevice.current.orientation
+                
+                // The image captured by the camera
+                let image = frame.capturedImage
+                
+                let imageOrientation: CGImagePropertyOrientation
+                switch orientation {
+                case .portrait:
+                    imageOrientation = .right
+                case .portraitUpsideDown:
+                    imageOrientation = .left
+                case .landscapeLeft:
+                    imageOrientation = .up
+                case .landscapeRight:
+                    imageOrientation = .down
+                case .unknown:
+                    //print("The device orientation is unknown, the predictions may be affected")
+                    fallthrough
+                default:
+                    // By default keep the last orientation
+                    // This applies for faceUp and faceDown
+                    imageOrientation = self.lastOrientation
+                }
+                
+                // For object detection, keeping track of the image buffer size
+                // to know how to draw bounding boxes based on relative values.
+                if self.bufferSize == nil || self.lastOrientation != imageOrientation {
+                    self.lastOrientation = imageOrientation
+                    let pixelBufferWidth = CVPixelBufferGetWidth(image)
+                    let pixelBufferHeight = CVPixelBufferGetHeight(image)
+                    if [.up, .down].contains(imageOrientation) {
+                        self.bufferSize = CGSize(width: pixelBufferWidth,
+                                                 height: pixelBufferHeight)
+                    } else {
+                        self.bufferSize = CGSize(width: pixelBufferHeight,
+                                                 height: pixelBufferWidth)
+                    }
+                }
+                
+                
+                /// - Tag: PassingFramesToVision
+                
+                // Invoke a VNRequestHandler with that image
+                let handler = VNImageRequestHandler(cvPixelBuffer: image, orientation: imageOrientation, options: [:])
+                
+                do {
+                    try handler.perform([self.objectDetectionRequest])
+                } catch {
+                    print("CoreML request failed with error: \(error.localizedDescription)")
                 }
             }
-            
-            
-            /// - Tag: PassingFramesToVision
-            
-            // Invoke a VNRequestHandler with that image
-            let handler = VNImageRequestHandler(cvPixelBuffer: image, orientation: imageOrientation, options: [:])
-            
-            do {
-                try handler.perform([self.objectDetectionRequest])
-            } catch {
-                print("CoreML request failed with error: \(error.localizedDescription)")
-            }
-            
         }
     }
     
@@ -133,6 +135,8 @@ extension ViewController {
     
     //     MARK: - AR ANCHOR
     func addAnchor(observation: VNRecognizedObjectObservation) {
+        guard !coachingOverlay.isActive else { return }
+        
         DispatchQueue.main.async {
             let rect = self.bounds(for: observation)
             let text = observation.labels.first?.identifier
@@ -161,11 +165,12 @@ extension ViewController {
                     }
                     
                 } else {
-//                    print("Failed to place boxNode, no plane detected")
+                    //print("Failed to place boxNode, no plane detected")
                 }
             }
         }
     }
+    
     func positionNode(box: Box, at rayCastResult: ARRaycastResult) {
         box.transform = SCNMatrix4(rayCastResult.anchor!.transform)
         box.eulerAngles = SCNVector3Make(box.eulerAngles.x + (Float.pi / 2), box.eulerAngles.y, box.eulerAngles.z)

@@ -26,7 +26,7 @@ class ViewController: UIViewController {
 
     // MARK: - UI Elements
     
-//    let coachingOverlay = ARCoachingOverlayView()
+    let coachingOverlay = ARCoachingOverlayView()
     /// Size of the camera image buffer (used for overlaying boxes)
     var bufferSize: CGSize! {
         didSet {
@@ -106,7 +106,7 @@ class ViewController: UIViewController {
         sceneView.session.delegate = self
         
         // Set up coaching overlay.
-//        setupCoachingOverlay()
+        setupCoachingOverlay()
         
         // Get the root layer so in order to draw rectangles
         rootLayer = sceneView.layer
@@ -170,15 +170,15 @@ class ViewController: UIViewController {
     // MARK: - Focus Square
 
     func updateFocusSquare() {
-
-        focusSquare.unhide()
-        statusViewController.scheduleMessage("TRY MOVING LEFT OR RIGHT", inSeconds: 5.0, messageType: .focusSquare)
-            
+        if coachingOverlay.isActive {
+            focusSquare.hide()
+        } else {
+            focusSquare.unhide()
+            statusViewController.scheduleMessage("TRY MOVING LEFT OR RIGHT", inSeconds: 5.0, messageType: .focusSquare)
+        }
         
-        /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
         // Perform ray casting only when ARKit tracking is in a good state.
         if let camera = session.currentFrame?.camera, case .normal = camera.trackingState,
-           
             let query = sceneView.getRaycastQuery(),
             let result = sceneView.castRay(for: query).first {
             
@@ -186,9 +186,9 @@ class ViewController: UIViewController {
                 self.sceneView.scene.rootNode.addChildNode(self.focusSquare)
                 self.focusSquare.state = .detecting(raycastResult: result, camera: camera)
             }
-//            if !coachingOverlay.isActive {
-//                addObjectButton.isHidden = false
-//            }
+            if !coachingOverlay.isActive {
+                addObjectButton.isHidden = false
+            }
             statusViewController.cancelScheduledMessage(for: .focusSquare)
         } else {
             updateQueue.async {

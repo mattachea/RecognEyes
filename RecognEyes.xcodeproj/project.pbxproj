@@ -19,6 +19,7 @@
 		39C0B95A1E9C6B1F003FCA0C /* Utilities.swift in Sources */ = {isa = PBXBuildFile; fileRef = 39C0B9581E9C6B1F003FCA0C /* Utilities.swift */; };
 		39D8DC1B1E8ADAE600386B05 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 39D8DC1A1E8ADAE600386B05 /* LaunchScreen.storyboard */; };
 		A30E07CF2600653200BC6886 /* fireplace.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = A30E07CE2600653200BC6886 /* fireplace.mp3 */; };
+		A34453D52601A55100A80CEC /* ViewController+CoachingOverlay.swift in Sources */ = {isa = PBXBuildFile; fileRef = A34453D42601A55100A80CEC /* ViewController+CoachingOverlay.swift */; };
 		A3AC063125F5CE070073CC4B /* doorYolo.mlmodel in Sources */ = {isa = PBXBuildFile; fileRef = A3AC063025F5CE070073CC4B /* doorYolo.mlmodel */; };
 		A3AC063425F5D2AC0073CC4B /* Box.swift in Sources */ = {isa = PBXBuildFile; fileRef = A3AC063325F5D2AC0073CC4B /* Box.swift */; };
 		A3AC063E25F727050073CC4B /* BoxController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A3AC063D25F727050073CC4B /* BoxController.swift */; };
@@ -46,6 +47,7 @@
 		39C0B9581E9C6B1F003FCA0C /* Utilities.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Utilities.swift; sourceTree = "<group>"; };
 		39D8DC1A1E8ADAE600386B05 /* LaunchScreen.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = LaunchScreen.storyboard; sourceTree = "<group>"; };
 		A30E07CE2600653200BC6886 /* fireplace.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; name = fireplace.mp3; path = "../../../../../../Downloads/CreatingAnImmersiveARExperienceWithAudio/Audio in ARKit/Resources/fireplace.mp3"; sourceTree = "<group>"; };
+		A34453D42601A55100A80CEC /* ViewController+CoachingOverlay.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "ViewController+CoachingOverlay.swift"; sourceTree = "<group>"; };
 		A3AC063025F5CE070073CC4B /* doorYolo.mlmodel */ = {isa = PBXFileReference; lastKnownFileType = file.mlmodel; name = doorYolo.mlmodel; path = ../../../../doorYolo.mlmodel; sourceTree = "<group>"; };
 		A3AC063325F5D2AC0073CC4B /* Box.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Box.swift; sourceTree = "<group>"; };
 		A3AC063D25F727050073CC4B /* BoxController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BoxController.swift; sourceTree = "<group>"; };
@@ -136,6 +138,7 @@
 				1488323E1EFC378A0043E0AB /* ViewController+Actions.swift */,
 				147D76491EFC36070000FEBF /* ViewController+ObjectSelection.swift */,
 				A3AC063D25F727050073CC4B /* BoxController.swift */,
+				A34453D42601A55100A80CEC /* ViewController+CoachingOverlay.swift */,
 				A3AC063325F5D2AC0073CC4B /* Box.swift */,
 				C46356661EF9CC480080C8D9 /* VirtualObjectARView.swift */,
 				A3AC063025F5CE070073CC4B /* doorYolo.mlmodel */,
@@ -238,6 +241,7 @@
 				148832411EFC3B250043E0AB /* FocusSquareSegment.swift in Sources */,
 				C42A71BD1E9C0AF200944367 /* FocusSquare.swift in Sources */,
 				3929C48C1E89EC2C00E00B60 /* AppDelegate.swift in Sources */,
+				A34453D52601A55100A80CEC /* ViewController+CoachingOverlay.swift in Sources */,
 				A3FCFEA125EB43D800707F00 /* ThresholdProvider.swift in Sources */,
 				A3AC063125F5CE070073CC4B /* doorYolo.mlmodel in Sources */,
 			);
