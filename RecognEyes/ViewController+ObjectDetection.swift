@@ -138,9 +138,9 @@ extension ViewController {
     
     //     MARK: - AR ANCHOR
     func addAnchor(observation: VNRecognizedObjectObservation) {
-        guard !coachingOverlay.isActive else {
-            return
-        }
+//        guard !coachingOverlay.isActive else {
+//            return
+//        }
         
         // ensures no anchors are placed when already navigating to an object
         guard self.shouldPlaceAnchors else {
@@ -161,19 +161,18 @@ extension ViewController {
             let rect = self.bounds(for: observation)
             let text = observation.labels.first?.identifier
             let point = CGPoint(x: rect.midX, y: rect.midY)
-            let scnHitTestResults = self.sceneView.hitTest(point,
-                                                           options: [SCNHitTestOption.searchMode: SCNHitTestSearchMode.all.rawValue])
-            guard !scnHitTestResults.contains(where: { $0.node.name == Box.name })
             
-            else {
-                //print("Hit test failed, node with same name found")
-                return
-                
-            }
+//            let scnHitTestResults = self.sceneView.hitTest(point, options: [SCNHitTestOption.searchMode: SCNHitTestSearchMode.all.rawValue])
+//            guard !scnHitTestResults.contains(where: { $0.node.name == Box.name })
+//
+//            else {
+//                //print("Hit test failed, node with same name found")
+//                return
+//            }
+            
             if let camera = self.sceneView.session.currentFrame?.camera, case .normal = camera.trackingState,
                let query = self.sceneView.raycastQuery(from: point, allowing: .existingPlaneInfinite, alignment: .any),
                let result = self.sceneView.session.raycast(query).first {
-                
                 
                 if let _ = result.anchor as? ARPlaneAnchor {
                     let boxNode = Box(text: text!, raycastResult: result)
@@ -182,7 +181,6 @@ extension ViewController {
                     self.updateQueue.async {
                         self.sceneView.scene.rootNode.addChildNode(boxNode)
                         self.boxController.loadedObjects.append(boxNode)
-                        print("placing ", classification.identifier)
                         self.sayDescription(text: classification.identifier + " detected")
                     }
                     

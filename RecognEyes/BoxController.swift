@@ -19,7 +19,7 @@ class BoxController {
         
         speakDistanceTimer = Timer.scheduledTimer(withTimeInterval: 2, repeats: true) { timer in
             let distance = self.getDistance(from: session.currentFrame!.camera, to: box)
-            let utterance = AVSpeechUtterance(string: String(distance))
+            let utterance = AVSpeechUtterance(string: String(distance) + "feet")
             utterance.voice = AVSpeechSynthesisVoice(language: "en-US")
             utterance.rate = 0.5
             synthesizer.speak(utterance)

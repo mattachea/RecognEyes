@@ -27,7 +27,7 @@ class ViewController: UIViewController {
 
     // MARK: - UI Elements
     
-    let coachingOverlay = ARCoachingOverlayView()
+//    let coachingOverlay = ARCoachingOverlayView()
     /// Size of the camera image buffer (used for overlaying boxes)
     var bufferSize: CGSize! {
         didSet {
@@ -112,7 +112,7 @@ class ViewController: UIViewController {
         sceneView.session.delegate = self
         
         // Set up coaching overlay.
-        setupCoachingOverlay()
+//        setupCoachingOverlay()
         
         // Get the root layer so in order to draw rectangles
         rootLayer = sceneView.layer
@@ -156,7 +156,7 @@ class ViewController: UIViewController {
     
     override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(animated)
-
+        self.boxController.stopSpeakDistance()
         session.pause()
     }
 
@@ -165,9 +165,9 @@ class ViewController: UIViewController {
     /// Creates a new AR configuration to run on the `session`.
     func resetTracking() {
 //        virtualObjectInteraction.selectedObject = nil
-        
+        self.boxController.stopSpeakDistance()
         let configuration = ARWorldTrackingConfiguration()
-        configuration.planeDetection = [.vertical]
+        configuration.planeDetection = [.vertical, .horizontal]
         if #available(iOS 12.0, *) {
             configuration.environmentTexturing = .automatic
         }
@@ -179,12 +179,12 @@ class ViewController: UIViewController {
     // MARK: - Focus Square
 
     func updateFocusSquare() {
-        if coachingOverlay.isActive {
-            focusSquare.hide()
-        } else {
-            focusSquare.unhide()
-            statusViewController.scheduleMessage("TRY MOVING LEFT OR RIGHT", inSeconds: 5.0, messageType: .focusSquare)
-        }
+//        if coachingOverlay.isActive {
+//            focusSquare.hide()
+//        } else {
+//            focusSquare.unhide()
+//            statusViewController.scheduleMessage("TRY MOVING LEFT OR RIGHT", inSeconds: 5.0, messageType: .focusSquare)
+//        }
         
         // Perform ray casting only when ARKit tracking is in a good state.
         if let camera = session.currentFrame?.camera, case .normal = camera.trackingState,
@@ -195,9 +195,9 @@ class ViewController: UIViewController {
                 self.sceneView.scene.rootNode.addChildNode(self.focusSquare)
                 self.focusSquare.state = .detecting(raycastResult: result, camera: camera)
             }
-            if !coachingOverlay.isActive {
-                addObjectButton.isHidden = false
-            }
+//            if !coachingOverlay.isActive {
+//                addObjectButton.isHidden = false
+//            }
             statusViewController.cancelScheduledMessage(for: .focusSquare)
         } else {
             updateQueue.async {

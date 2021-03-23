@@ -14,11 +14,9 @@ extension ViewController: VirtualObjectSelectionViewControllerDelegate {
     
     // - Tag: Turn on sound
     func virtualObjectSelectionViewController(_: VirtualObjectSelectionViewController, didSelectObject object: Box) {
-        print("object selected, starting sound")
         
         //if object is selected do not allow more objects to be placed
         self.shouldPlaceAnchors = false
-        print("select ", self.shouldPlaceAnchors)
 
         //remove any previously selected objects and turn off positional audio and distance sound
         self.boxController.selectedObjects.forEach{ index in
@@ -40,11 +38,7 @@ extension ViewController: VirtualObjectSelectionViewControllerDelegate {
         
         //allow placing anchors again
         self.shouldPlaceAnchors = true
-        print("deselect ", self.shouldPlaceAnchors)
         
-        
-        
-        print("object deselected, stopping sound")
         guard let index = self.boxController.loadedObjects.firstIndex(of: object) else {return}
         self.boxController.selectedObjects.remove(index)
         self.boxController.stopSound(at: object)

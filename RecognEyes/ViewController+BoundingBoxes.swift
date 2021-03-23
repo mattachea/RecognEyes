@@ -136,7 +136,7 @@ extension ViewController {
     
     //for one observation
     func drawBox(observation: VNRecognizedObjectObservation) {
-        guard !coachingOverlay.isActive else { return }
+//        guard !coachingOverlay.isActive else { return }
 
         DispatchQueue.main.async {
             self.detectionOverlay.sublayers = nil // remove all the old recognized objects
