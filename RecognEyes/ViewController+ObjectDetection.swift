@@ -138,23 +138,28 @@ extension ViewController {
     
     //     MARK: - AR ANCHOR
     func addAnchor(observation: VNRecognizedObjectObservation) {
-//        guard !coachingOverlay.isActive else {
-//            return
-//        }
+        guard !coachingOverlay.isActive else {
+            return
+        }
         
         // ensures no anchors are placed when already navigating to an object
         guard self.shouldPlaceAnchors else {
             return
         }
         
-        // ensure no nodes are visible from the point of view
-        guard self.sceneView.nodesInsideFrustum(of: sceneView.pointOfView!).isEmpty else {
+        
+        let isAnyObjectInView = boxController.loadedObjects.contains { object in
+            return sceneView.isNode(object, insideFrustumOf: sceneView.pointOfView!)
+        }
+        
+        // ensure no nodes in the loadedObjects array are visible from the point of view
+        guard !isAnyObjectInView else {
             return
         }
         
         guard let classification = observation.labels.first else {
-                print("confidence too low")
-                return
+            print("confidence too low")
+            return
         }
             
         DispatchQueue.main.async {
@@ -175,6 +180,7 @@ extension ViewController {
                let result = self.sceneView.session.raycast(query).first {
                 
                 if let _ = result.anchor as? ARPlaneAnchor {
+                    print("placing node ", String(text ?? "pppp"))
                     let boxNode = Box(text: text!, raycastResult: result)
                     self.positionNode(box: boxNode, at: result)
                     

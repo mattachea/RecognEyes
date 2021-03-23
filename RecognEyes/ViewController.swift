@@ -27,7 +27,7 @@ class ViewController: UIViewController {
 
     // MARK: - UI Elements
     
-//    let coachingOverlay = ARCoachingOverlayView()
+    let coachingOverlay = ARCoachingOverlayView()
     /// Size of the camera image buffer (used for overlaying boxes)
     var bufferSize: CGSize! {
         didSet {
@@ -38,7 +38,6 @@ class ViewController: UIViewController {
                     updateDetectionOverlaySize()
                 }
             }
-
         }
     }
     
@@ -75,7 +74,6 @@ class ViewController: UIViewController {
 //    lazy var virtualObjectInteraction = VirtualObjectInteraction(sceneView: sceneView, viewController: self)
     
     /// Coordinates the loading and unloading of reference nodes for virtual objects.
-//    let virtualObjectLoader = VirtualObjectLoader()
     let boxController = BoxController()
     
     /// Source for audio playback
@@ -97,11 +95,8 @@ class ViewController: UIViewController {
     /// The detection overlay layer used to render bounding boxes
     var detectionOverlay: CALayer!
     
-
     // To convert text to speech
     let synthesizer = AVSpeechSynthesizer()
-    /// Concurrent queue to be used for model predictions
-
     
     // MARK: - View Controller Life Cycle
     
@@ -112,7 +107,7 @@ class ViewController: UIViewController {
         sceneView.session.delegate = self
         
         // Set up coaching overlay.
-//        setupCoachingOverlay()
+        setupCoachingOverlay()
         
         // Get the root layer so in order to draw rectangles
         rootLayer = sceneView.layer
@@ -167,7 +162,7 @@ class ViewController: UIViewController {
 //        virtualObjectInteraction.selectedObject = nil
         self.boxController.stopSpeakDistance()
         let configuration = ARWorldTrackingConfiguration()
-        configuration.planeDetection = [.vertical, .horizontal]
+        configuration.planeDetection = [.vertical]
         if #available(iOS 12.0, *) {
             configuration.environmentTexturing = .automatic
         }
@@ -179,12 +174,12 @@ class ViewController: UIViewController {
     // MARK: - Focus Square
 
     func updateFocusSquare() {
-//        if coachingOverlay.isActive {
-//            focusSquare.hide()
-//        } else {
-//            focusSquare.unhide()
-//            statusViewController.scheduleMessage("TRY MOVING LEFT OR RIGHT", inSeconds: 5.0, messageType: .focusSquare)
-//        }
+        if coachingOverlay.isActive {
+            focusSquare.hide()
+        } else {
+            focusSquare.unhide()
+            statusViewController.scheduleMessage("Move slowly left and right", inSeconds: 2.0, messageType: .focusSquare)
+        }
         
         // Perform ray casting only when ARKit tracking is in a good state.
         if let camera = session.currentFrame?.camera, case .normal = camera.trackingState,
@@ -195,9 +190,9 @@ class ViewController: UIViewController {
                 self.sceneView.scene.rootNode.addChildNode(self.focusSquare)
                 self.focusSquare.state = .detecting(raycastResult: result, camera: camera)
             }
-//            if !coachingOverlay.isActive {
-//                addObjectButton.isHidden = false
-//            }
+            if !coachingOverlay.isActive {
+                addObjectButton.isHidden = false
+            }
             statusViewController.cancelScheduledMessage(for: .focusSquare)
         } else {
             updateQueue.async {
