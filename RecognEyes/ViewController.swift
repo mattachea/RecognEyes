@@ -41,6 +41,10 @@ class ViewController: UIViewController {
 
         }
     }
+    
+    var shouldPlaceAnchors = true
+    
+    
     /// The last known image orientation
     /// When the image orientation changes, the buffer size used for rendering boxes needs to be adjusted
     var lastOrientation: CGImagePropertyOrientation = .right
@@ -131,6 +135,9 @@ class ViewController: UIViewController {
         // Set the delegate to ensure this gesture is only used when there are no virtual objects in the scene.
         tapGesture.delegate = self
         sceneView.addGestureRecognizer(tapGesture)
+        
+        
+    
     }
 
     override func viewDidAppear(_ animated: Bool) {

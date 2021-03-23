@@ -18,11 +18,15 @@
 		3929C49F1E89EE4400E00B60 /* Models.scnassets in Resources */ = {isa = PBXBuildFile; fileRef = 3929C49E1E89EE4400E00B60 /* Models.scnassets */; };
 		39C0B95A1E9C6B1F003FCA0C /* Utilities.swift in Sources */ = {isa = PBXBuildFile; fileRef = 39C0B9581E9C6B1F003FCA0C /* Utilities.swift */; };
 		39D8DC1B1E8ADAE600386B05 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 39D8DC1A1E8ADAE600386B05 /* LaunchScreen.storyboard */; };
-		A30E07CF2600653200BC6886 /* fireplace.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = A30E07CE2600653200BC6886 /* fireplace.mp3 */; };
+		A31306B82606C5EA008F29B7 /* detectDoors1000.mlmodel in Sources */ = {isa = PBXBuildFile; fileRef = A31306B72606C5EA008F29B7 /* detectDoors1000.mlmodel */; };
+		A31306C22606DCC6008F29B7 /* detectDoors500.mlmodel in Sources */ = {isa = PBXBuildFile; fileRef = A31306C12606DCC6008F29B7 /* detectDoors500.mlmodel */; };
+		A31306C526070316008F29B7 /* detectDoors5000.mlmodel in Sources */ = {isa = PBXBuildFile; fileRef = A31306C426070316008F29B7 /* detectDoors5000.mlmodel */; };
 		A34453D52601A55100A80CEC /* ViewController+CoachingOverlay.swift in Sources */ = {isa = PBXBuildFile; fileRef = A34453D42601A55100A80CEC /* ViewController+CoachingOverlay.swift */; };
-		A3AC063125F5CE070073CC4B /* doorYolo.mlmodel in Sources */ = {isa = PBXBuildFile; fileRef = A3AC063025F5CE070073CC4B /* doorYolo.mlmodel */; };
+		A370DC0C26066929009C0AFD /* doorYolo.mlmodel in Sources */ = {isa = PBXBuildFile; fileRef = A370DC0B26066929009C0AFD /* doorYolo.mlmodel */; };
+		A370DC0F26066933009C0AFD /* fireplace.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = A370DC0E26066933009C0AFD /* fireplace.mp3 */; };
 		A3AC063425F5D2AC0073CC4B /* Box.swift in Sources */ = {isa = PBXBuildFile; fileRef = A3AC063325F5D2AC0073CC4B /* Box.swift */; };
 		A3AC063E25F727050073CC4B /* BoxController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A3AC063D25F727050073CC4B /* BoxController.swift */; };
+		A3F625912608FEAC007A8693 /* detectDoorsOpen.mlmodel in Sources */ = {isa = PBXBuildFile; fileRef = A3F625902608FEAC007A8693 /* detectDoorsOpen.mlmodel */; };
 		A3FCFE9525EB387200707F00 /* ViewController+BoundingBoxes.swift in Sources */ = {isa = PBXBuildFile; fileRef = A3FCFE9425EB387200707F00 /* ViewController+BoundingBoxes.swift */; };
 		A3FCFE9B25EB3AC200707F00 /* ViewController+ObjectDetection.swift in Sources */ = {isa = PBXBuildFile; fileRef = A3FCFE9A25EB3AC200707F00 /* ViewController+ObjectDetection.swift */; };
 		A3FCFEA125EB43D800707F00 /* ThresholdProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = A3FCFEA025EB43D800707F00 /* ThresholdProvider.swift */; };
@@ -46,11 +50,15 @@
 		3929C49E1E89EE4400E00B60 /* Models.scnassets */ = {isa = PBXFileReference; lastKnownFileType = wrapper.scnassets; path = Models.scnassets; sourceTree = "<group>"; };
 		39C0B9581E9C6B1F003FCA0C /* Utilities.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Utilities.swift; sourceTree = "<group>"; };
 		39D8DC1A1E8ADAE600386B05 /* LaunchScreen.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = LaunchScreen.storyboard; sourceTree = "<group>"; };
-		A30E07CE2600653200BC6886 /* fireplace.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; name = fireplace.mp3; path = "../../../../../../Downloads/CreatingAnImmersiveARExperienceWithAudio/Audio in ARKit/Resources/fireplace.mp3"; sourceTree = "<group>"; };
+		A31306B72606C5EA008F29B7 /* detectDoors1000.mlmodel */ = {isa = PBXFileReference; lastKnownFileType = file.mlmodel; path = detectDoors1000.mlmodel; sourceTree = "<group>"; };
+		A31306C12606DCC6008F29B7 /* detectDoors500.mlmodel */ = {isa = PBXFileReference; lastKnownFileType = file.mlmodel; path = detectDoors500.mlmodel; sourceTree = "<group>"; };
+		A31306C426070316008F29B7 /* detectDoors5000.mlmodel */ = {isa = PBXFileReference; lastKnownFileType = file.mlmodel; path = detectDoors5000.mlmodel; sourceTree = "<group>"; };
 		A34453D42601A55100A80CEC /* ViewController+CoachingOverlay.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "ViewController+CoachingOverlay.swift"; sourceTree = "<group>"; };
-		A3AC063025F5CE070073CC4B /* doorYolo.mlmodel */ = {isa = PBXFileReference; lastKnownFileType = file.mlmodel; name = doorYolo.mlmodel; path = ../../../../doorYolo.mlmodel; sourceTree = "<group>"; };
+		A370DC0B26066929009C0AFD /* doorYolo.mlmodel */ = {isa = PBXFileReference; lastKnownFileType = file.mlmodel; path = doorYolo.mlmodel; sourceTree = "<group>"; };
+		A370DC0E26066933009C0AFD /* fireplace.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = fireplace.mp3; sourceTree = "<group>"; };
 		A3AC063325F5D2AC0073CC4B /* Box.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Box.swift; sourceTree = "<group>"; };
 		A3AC063D25F727050073CC4B /* BoxController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BoxController.swift; sourceTree = "<group>"; };
+		A3F625902608FEAC007A8693 /* detectDoorsOpen.mlmodel */ = {isa = PBXFileReference; lastKnownFileType = file.mlmodel; path = detectDoorsOpen.mlmodel; sourceTree = "<group>"; };
 		A3FCFE9425EB387200707F00 /* ViewController+BoundingBoxes.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "ViewController+BoundingBoxes.swift"; sourceTree = "<group>"; };
 		A3FCFE9A25EB3AC200707F00 /* ViewController+ObjectDetection.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "ViewController+ObjectDetection.swift"; sourceTree = "<group>"; };
 		A3FCFEA025EB43D800707F00 /* ThresholdProvider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ThresholdProvider.swift; sourceTree = "<group>"; };
@@ -101,7 +109,12 @@
 		1488324C1EFC3ED00043E0AB /* Resources */ = {
 			isa = PBXGroup;
 			children = (
-				A30E07CE2600653200BC6886 /* fireplace.mp3 */,
+				A370DC0E26066933009C0AFD /* fireplace.mp3 */,
+				A31306B72606C5EA008F29B7 /* detectDoors1000.mlmodel */,
+				A3F625902608FEAC007A8693 /* detectDoorsOpen.mlmodel */,
+				A31306C12606DCC6008F29B7 /* detectDoors500.mlmodel */,
+				A31306C426070316008F29B7 /* detectDoors5000.mlmodel */,
+				A370DC0B26066929009C0AFD /* doorYolo.mlmodel */,
 				3929C49E1E89EE4400E00B60 /* Models.scnassets */,
 				3929C4921E89EC2C00E00B60 /* Assets.xcassets */,
 				3929C4971E89EC2C00E00B60 /* Info.plist */,
@@ -141,7 +154,6 @@
 				A34453D42601A55100A80CEC /* ViewController+CoachingOverlay.swift */,
 				A3AC063325F5D2AC0073CC4B /* Box.swift */,
 				C46356661EF9CC480080C8D9 /* VirtualObjectARView.swift */,
-				A3AC063025F5CE070073CC4B /* doorYolo.mlmodel */,
 				113B64D01ECA81CA0071CBD1 /* Focus Square */,
 				1488324B1EFC3EBF0043E0AB /* Additional View Controllers */,
 				1488324A1EFC3E9C0043E0AB /* Utilities */,
@@ -213,7 +225,7 @@
 			files = (
 				3929C49F1E89EE4400E00B60 /* Models.scnassets in Resources */,
 				39D8DC1B1E8ADAE600386B05 /* LaunchScreen.storyboard in Resources */,
-				A30E07CF2600653200BC6886 /* fireplace.mp3 in Resources */,
+				A370DC0F26066933009C0AFD /* fireplace.mp3 in Resources */,
 				3929C4931E89EC2C00E00B60 /* Assets.xcassets in Resources */,
 				3929C4911E89EC2C00E00B60 /* Main.storyboard in Resources */,
 			);
@@ -226,13 +238,17 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				A31306B82606C5EA008F29B7 /* detectDoors1000.mlmodel in Sources */,
 				11BD822A1F09D750003F11C8 /* ViewController+ObjectSelection.swift in Sources */,
 				1488323F1EFC378A0043E0AB /* ViewController+Actions.swift in Sources */,
+				A31306C22606DCC6008F29B7 /* detectDoors500.mlmodel in Sources */,
 				A3AC063425F5D2AC0073CC4B /* Box.swift in Sources */,
 				3929C48E1E89EC2C00E00B60 /* ViewController.swift in Sources */,
 				A3FCFE9B25EB3AC200707F00 /* ViewController+ObjectDetection.swift in Sources */,
+				A3F625912608FEAC007A8693 /* detectDoorsOpen.mlmodel in Sources */,
 				C41366B91EB80DD400EC054A /* StatusViewController.swift in Sources */,
 				39C0B95A1E9C6B1F003FCA0C /* Utilities.swift in Sources */,
+				A31306C526070316008F29B7 /* detectDoors5000.mlmodel in Sources */,
 				147062641F06FA790003EE03 /* VirtualObjectSelection.swift in Sources */,
 				A3AC063E25F727050073CC4B /* BoxController.swift in Sources */,
 				A3FCFE9525EB387200707F00 /* ViewController+BoundingBoxes.swift in Sources */,
@@ -243,7 +259,7 @@
 				3929C48C1E89EC2C00E00B60 /* AppDelegate.swift in Sources */,
 				A34453D52601A55100A80CEC /* ViewController+CoachingOverlay.swift in Sources */,
 				A3FCFEA125EB43D800707F00 /* ThresholdProvider.swift in Sources */,
-				A3AC063125F5CE070073CC4B /* doorYolo.mlmodel in Sources */,
+				A370DC0C26066929009C0AFD /* doorYolo.mlmodel in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -391,13 +407,14 @@
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = 7657PJ7GJ8;
 				INFOPLIST_FILE = "$(SRCROOT)/RecognEyes/Resources/Info.plist";
-				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 14.1;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = RecognEyes;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
 				SWIFT_SWIFT3_OBJC_INFERENCE = Default;
 				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Debug;
 		};
@@ -411,13 +428,14 @@
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = 7657PJ7GJ8;
 				INFOPLIST_FILE = "$(SRCROOT)/RecognEyes/Resources/Info.plist";
-				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 14.1;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = RecognEyes;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
 				SWIFT_SWIFT3_OBJC_INFERENCE = Default;
 				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Release;
 		};

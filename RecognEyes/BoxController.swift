@@ -43,9 +43,11 @@ class BoxController {
         box.removeAllAudioPlayers()
         // Create a player from the source and add it to `objectNode`        
         box.addAudioPlayer(SCNAudioPlayer(source: audioSource))
+        
     }
     
     func stopSound(at box: Box) {
+
         box.removeAllAudioPlayers()
     }
 

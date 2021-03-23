@@ -18,7 +18,7 @@ extension ViewController {
     
     func setupObjectDetection() {
         // Load the detection models
-        guard let mlModel = try? doorYolo(configuration: .init()).model,
+        guard let mlModel = try? detectDoors5000(configuration: .init()).model,
               let detector = try? VNCoreMLModel(for: mlModel) else {
             print("Failed to load detector!")
             return
@@ -138,13 +138,25 @@ extension ViewController {
     
     //     MARK: - AR ANCHOR
     func addAnchor(observation: VNRecognizedObjectObservation) {
-        guard !coachingOverlay.isActive else { return }
+        guard !coachingOverlay.isActive else {
+            return
+        }
+        
+        // ensures no anchors are placed when already navigating to an object
+        guard self.shouldPlaceAnchors else {
+            return
+        }
+        
+        // ensure no nodes are visible from the point of view
+        guard self.sceneView.nodesInsideFrustum(of: sceneView.pointOfView!).isEmpty else {
+            return
+        }
         
         guard let classification = observation.labels.first else {
                 print("confidence too low")
                 return
         }
-        
+            
         DispatchQueue.main.async {
             let rect = self.bounds(for: observation)
             let text = observation.labels.first?.identifier
@@ -170,7 +182,7 @@ extension ViewController {
                     self.updateQueue.async {
                         self.sceneView.scene.rootNode.addChildNode(boxNode)
                         self.boxController.loadedObjects.append(boxNode)
-                        print(classification.identifier)
+                        print("placing ", classification.identifier)
                         self.sayDescription(text: classification.identifier + " detected")
                     }
                     

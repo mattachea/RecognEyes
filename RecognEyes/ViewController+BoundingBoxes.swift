@@ -125,7 +125,6 @@ extension ViewController {
                                                                 confidence: topLabelObservation.confidence)
                 shapeLayer.addSublayer(textLayer)
                 self.detectionOverlay.addSublayer(shapeLayer)
-                print(topLabelObservation.identifier)
             }
 
             self.updateLayerGeometry()
@@ -149,7 +148,7 @@ extension ViewController {
             let objectBounds = self.bounds(for: observation)
             let shapeLayer = self.createRoundedRectLayerWithBounds(objectBounds)
             let textLayer = self.createTextSubLayerInBounds(objectBounds, identifier: classification.identifier, confidence: classification.confidence)
-//            print(classification.identifier, classification.confidence, objectBounds)
+//            print(classification.identifier, classification.confidence)
             
             shapeLayer.addSublayer(textLayer)
             self.detectionOverlay.addSublayer(shapeLayer)
