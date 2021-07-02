@@ -28,6 +28,7 @@ class ViewController: UIViewController {
     // MARK: - UI Elements
     
     let coachingOverlay = ARCoachingOverlayView()
+    
     /// Size of the camera image buffer (used for overlaying boxes)
     var bufferSize: CGSize! {
         didSet {
@@ -223,9 +224,12 @@ class ViewController: UIViewController {
     // MARK: - Sound
     private func setUpAudio() {
         // Instantiate the audio source
-        audioSource = SCNAudioSource(fileNamed: "fireplace.mp3")!
+        audioSource = SCNAudioSource(fileNamed: "ding.mp3")!
         // As an environmental sound layer, audio should play indefinitely
         audioSource.loops = true
+        // change rate
+        audioSource.rate = 0.01
+        
         // Decode the audio from disk ahead of time to prevent a delay in playback
         audioSource.load()
     }

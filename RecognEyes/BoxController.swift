@@ -17,11 +17,12 @@ class BoxController {
     //MARK: -Distance
     func speakDistance(from session: ARSession , to box: Box, synthesizer: AVSpeechSynthesizer) {
         
-        speakDistanceTimer = Timer.scheduledTimer(withTimeInterval: 2, repeats: true) { timer in
+        speakDistanceTimer = Timer.scheduledTimer(withTimeInterval: 5, repeats: true) { timer in
             let distance = self.getDistance(from: session.currentFrame!.camera, to: box)
             let utterance = AVSpeechUtterance(string: String(distance) + "feet")
             utterance.voice = AVSpeechSynthesisVoice(language: "en-US")
             utterance.rate = 0.5
+            utterance.volume = 0.25
             synthesizer.speak(utterance)
         }
     }

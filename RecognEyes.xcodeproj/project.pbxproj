@@ -26,6 +26,7 @@
 		A370DC0F26066933009C0AFD /* fireplace.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = A370DC0E26066933009C0AFD /* fireplace.mp3 */; };
 		A3AC063425F5D2AC0073CC4B /* Box.swift in Sources */ = {isa = PBXBuildFile; fileRef = A3AC063325F5D2AC0073CC4B /* Box.swift */; };
 		A3AC063E25F727050073CC4B /* BoxController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A3AC063D25F727050073CC4B /* BoxController.swift */; };
+		A3E07B362609BEC0005F20C5 /* ding.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = A3E07B352609BEC0005F20C5 /* ding.mp3 */; };
 		A3F625912608FEAC007A8693 /* detectDoorsOpen.mlmodel in Sources */ = {isa = PBXBuildFile; fileRef = A3F625902608FEAC007A8693 /* detectDoorsOpen.mlmodel */; };
 		A3FCFE9525EB387200707F00 /* ViewController+BoundingBoxes.swift in Sources */ = {isa = PBXBuildFile; fileRef = A3FCFE9425EB387200707F00 /* ViewController+BoundingBoxes.swift */; };
 		A3FCFE9B25EB3AC200707F00 /* ViewController+ObjectDetection.swift in Sources */ = {isa = PBXBuildFile; fileRef = A3FCFE9A25EB3AC200707F00 /* ViewController+ObjectDetection.swift */; };
@@ -58,6 +59,7 @@
 		A370DC0E26066933009C0AFD /* fireplace.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = fireplace.mp3; sourceTree = "<group>"; };
 		A3AC063325F5D2AC0073CC4B /* Box.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Box.swift; sourceTree = "<group>"; };
 		A3AC063D25F727050073CC4B /* BoxController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BoxController.swift; sourceTree = "<group>"; };
+		A3E07B352609BEC0005F20C5 /* ding.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = ding.mp3; sourceTree = "<group>"; };
 		A3F625902608FEAC007A8693 /* detectDoorsOpen.mlmodel */ = {isa = PBXFileReference; lastKnownFileType = file.mlmodel; path = detectDoorsOpen.mlmodel; sourceTree = "<group>"; };
 		A3FCFE9425EB387200707F00 /* ViewController+BoundingBoxes.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "ViewController+BoundingBoxes.swift"; sourceTree = "<group>"; };
 		A3FCFE9A25EB3AC200707F00 /* ViewController+ObjectDetection.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "ViewController+ObjectDetection.swift"; sourceTree = "<group>"; };
@@ -111,6 +113,7 @@
 			children = (
 				A370DC0E26066933009C0AFD /* fireplace.mp3 */,
 				A31306B72606C5EA008F29B7 /* detectDoors1000.mlmodel */,
+				A3E07B352609BEC0005F20C5 /* ding.mp3 */,
 				A3F625902608FEAC007A8693 /* detectDoorsOpen.mlmodel */,
 				A31306C12606DCC6008F29B7 /* detectDoors500.mlmodel */,
 				A31306C426070316008F29B7 /* detectDoors5000.mlmodel */,
@@ -225,6 +228,7 @@
 			files = (
 				3929C49F1E89EE4400E00B60 /* Models.scnassets in Resources */,
 				39D8DC1B1E8ADAE600386B05 /* LaunchScreen.storyboard in Resources */,
+				A3E07B362609BEC0005F20C5 /* ding.mp3 in Resources */,
 				A370DC0F26066933009C0AFD /* fireplace.mp3 in Resources */,
 				3929C4931E89EC2C00E00B60 /* Assets.xcassets in Resources */,
 				3929C4911E89EC2C00E00B60 /* Main.storyboard in Resources */,

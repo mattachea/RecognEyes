@@ -90,6 +90,7 @@ extension ViewController {
         shapeLayer.position = CGPoint(x: bounds.midX, y: bounds.midY)
         shapeLayer.name = "Found Object"
         shapeLayer.backgroundColor = CGColor(colorSpace: CGColorSpaceCreateDeviceRGB(), components: [0.0, 0.8, 1.0, 0.6])
+        shapeLayer.backgroundColor = CGColor(red: 20/255, green: 97/255, blue: 41/255, alpha: 0.4)
         shapeLayer.cornerRadius = 14
         return shapeLayer
     }

@@ -38,6 +38,8 @@ class StatusViewController: UIViewController {
     @IBOutlet weak private var messageLabel: UILabel!
     
     @IBOutlet weak private var restartExperienceButton: UIButton!
+    
+    
 
     // MARK: - Properties
     
